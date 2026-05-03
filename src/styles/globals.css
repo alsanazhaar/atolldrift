@@ -249,6 +249,10 @@ nav {
   padding: 2.8rem 1.1rem 2.5rem;
   position: relative;
   overflow: hidden;
+  min-height: 82vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 }
 .hero-bg-motif {
   position: absolute;
@@ -799,7 +803,7 @@ footer { background: var(--ink); padding: 1.8rem 1.1rem 1.2rem; }
 .fb { border-top: 1px solid rgba(255, 255, 255, .1); padding-top: .72rem; font-size: .6rem; text-align: center; color: rgba(255, 255, 255, .38); }
 
 /* ── MARKETPLACE ──────────────────────────────────────────────────── */
-.mkt-hero { background: var(--tq); padding: 2.4rem 1.1rem 2rem; position: relative; overflow: hidden; }
+.mkt-hero { background: var(--tq); padding: 2.4rem 1.1rem 2rem; position: relative; overflow: hidden; min-height: 50vh; display: flex; flex-direction: column; justify-content: flex-end; }
 .mkt-hero-bg { position: absolute; right: -20px; bottom: -20px; opacity: .08; pointer-events: none; }
 .mkt-kicker { font-size: .58rem; letter-spacing: .18em; text-transform: uppercase; color: rgba(255, 255, 255, .8); margin-bottom: .6rem; }
 .mkt-hero h1 { font-family: Georgia, serif; font-size: clamp(1.6rem, 5.5vw, 2.2rem); color: var(--white); line-height: 1.1; margin-bottom: .5rem; }
@@ -919,7 +923,7 @@ footer { background: var(--ink); padding: 1.8rem 1.1rem 1.2rem; }
 .reveal-right.visible { opacity: 1; transform: translateX(0); }
 
 /* ── DETAIL PAGES ─────────────────────────────────────────────────── */
-.dp-hero { background: #0d1f24; padding: 2rem 1.1rem 1.8rem; min-height: 60vh; display: flex; flex-direction: column; justify-content: flex-end; }
+.dp-hero { background: #0d1f24; padding: 2rem 1.1rem 1.8rem; min-height: 50vh; display: flex; flex-direction: column; justify-content: flex-end; }
 .dp-back {
   font-size: .65rem;
   letter-spacing: .09em;
@@ -1175,7 +1179,7 @@ footer { background: var(--ink); padding: 1.8rem 1.1rem 1.2rem; }
   footer { padding: 4rem 0 2rem; }
   .f-cols { grid-template-columns: 2fr 1fr 1fr 1fr; gap: 2rem; }
 
-  .dp-hero { padding: 4rem 0 3rem; min-height: 70vh; }
+  .dp-hero { padding: 4rem 0 3rem; min-height: 58vh; }
   .dp-body { padding: 0; }
   .dp-body > .inner { display: grid; grid-template-columns: 1fr 340px; gap: 2.5rem; align-items: start; padding-top: 2.5rem; padding-bottom: 3rem; }
   .dp-sidebar { position: sticky; top: 80px; }
@@ -1636,4 +1640,16 @@ footer { background: var(--ink); padding: 1.8rem 1.1rem 1.2rem; }
 .dp-hero .dp-back,
 .dp-hero h1 {
   text-shadow: 0 2px 12px rgba(0,0,0,.5), 0 1px 3px rgba(0,0,0,.4);
+}
+
+/* ── HERO SIZE HIERARCHY ─────────────────────────────────────────── */
+/* Homepage: large + immersive */
+@media (max-width: 899px) {
+  .hero { min-height: 65vh; justify-content: flex-end; }
+}
+
+/* All other page heroes: medium + consistent */
+@media (max-width: 899px) {
+  .dp-hero { min-height: 45vh; }
+  .mkt-hero { min-height: 45vh; }
 }
