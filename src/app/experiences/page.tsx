@@ -52,13 +52,14 @@ export default function ExperiencesPage() {
             <circle cx="110" cy="110" r="28" stroke="white" strokeWidth="0.8" fill="none" />
           </svg>
           <div className="inner" style={{ position: "relative", zIndex: 2 }}>
-            {/* Frosted background panel behind text */}
+            {/* Frosted glass panel behind text */}
             <div style={{
               position: "absolute",
               inset: "-1.4rem -1.6rem",
-              background: "rgba(2, 28, 34, 0.55)",
-              backdropFilter: "blur(2px)",
-              WebkitBackdropFilter: "blur(2px)",
+              background: "rgba(255, 255, 255, 0.12)",
+              backdropFilter: "blur(16px) saturate(1.4)",
+              WebkitBackdropFilter: "blur(16px) saturate(1.4)",
+              border: "1px solid rgba(255, 255, 255, 0.18)",
               borderRadius: "2px",
               zIndex: -1,
             }} />
