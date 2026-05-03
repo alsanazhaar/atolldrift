@@ -56,27 +56,40 @@ export default function GroupSection({ journeys = [] }: GroupSectionProps) {
         </div>
 
         <div className="group-right">
-          <div className="dep-list">
+          <div style={{ display: "flex", flexDirection: "column", gap: ".65rem" }}>
             {featured.map((j, i) => (
-              <div key={j.id} className="dep-row">
-                <div className="dep-left">
-                  <div className="dep-atoll-tag th">{atollLabel[j.atollId] ?? j.atollId}</div>
-                  <div className="dep-name">{j.title}</div>
-                  <div className="dep-date">{j.duration} · From ${j.price.toLocaleString()}</div>
-                </div>
-                <div className="dep-right">
-                  <div style={{
-                    fontSize: ".52rem", fontWeight: 700, letterSpacing: ".08em",
-                    textTransform: "uppercase", color: "var(--tq-d)",
-                    marginBottom: ".35rem",
-                  }}>
-                    {featuredLabels[i] ?? "Popular"}
+              <Link key={j.id} href={`/journeys/${j.id}`}
+                className={`jcard${(j as any).goldAccent ? " gold-l" : ""}`}
+                style={{ textDecoration: "none" }}>
+                {(j as any).bannerSrc && (
+                  <div className="jcard-img">
+                    <img src={(j as any).bannerSrc} alt={j.title} />
                   </div>
-                  <Link href={`/journeys/${j.id}`} className="djoin">
-                    View
-                  </Link>
+                )}
+                <div className="jcard-content">
+                  <div style={{ fontSize: ".48rem", fontWeight: 700, letterSpacing: ".12em", textTransform: "uppercase", color: "var(--tq-d)", marginBottom: ".2rem" }}>
+                    {atollLabel[j.atollId] ?? j.atollId} · {featuredLabels[i] ?? "Popular"}
+                  </div>
+                  <div className="jcard-top">
+                    <div className="jcard-title">{j.title}</div>
+                    <div className="jcard-price">
+                      <span style={{ fontSize: ".5rem", fontFamily: "Montserrat,sans-serif", fontWeight: 600, letterSpacing: ".06em", opacity: .7, marginRight: ".2rem", verticalAlign: "middle" }}>FROM</span>
+                      ${j.price.toLocaleString()}
+                    </div>
+                  </div>
+                  <div className="jcard-meta">
+                    <span>{j.duration}</span>
+                    <span style={{ color: "var(--off3)" }}>·</span>
+                    <span>{j.groupSize}</span>
+                    <span style={{ color: "var(--off3)" }}>·</span>
+                    <span style={{ color: "var(--tq-d)", fontWeight: 600 }}>Flexible dates</span>
+                  </div>
+                  <div className="jcard-cta">
+                    <span>Request a spot</span>
+                    <span className="jcard-cta-arrow">→</span>
+                  </div>
                 </div>
-              </div>
+              </Link>
             ))}
           </div>
           <Link href="/journeys" className="full-btn" style={{ display: "block", textAlign: "center", textDecoration: "none" }}>

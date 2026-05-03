@@ -26,26 +26,40 @@ function TruthPoint({ text, variant }: { text: string; variant?: "gold" }) {
 }
 
 function JourneyCard({ journey }: { journey: Journey }) {
+  const img = (journey as any).bannerSrc ?? null;
   return (
-    <Link href={`/journeys/${journey.id}`} className={`jcard${journey.goldAccent ? " gold-l" : ""}`} style={{ textDecoration: "none" }}>
-      <div className="jcard-top">
-        <div className="jcard-title">{journey.title}</div>
-        <div className="jcard-price">
-          <span style={{ fontSize: ".5rem", fontFamily: "Montserrat, sans-serif", fontWeight: 600, letterSpacing: ".06em", opacity: .7, marginRight: ".2rem", verticalAlign: "middle" }}>FROM</span>
-          ${journey.price.toLocaleString()}
+    <Link
+      href={`/journeys/${journey.id}`}
+      className={`jcard${journey.goldAccent ? " gold-l" : ""}`}
+      style={{ textDecoration: "none" }}
+    >
+      {/* Image strip */}
+      {img && (
+        <div className="jcard-img">
+          <img src={img} alt={journey.title} />
         </div>
-      </div>
-      <p className="jcard-tagline">{journey.tagline}</p>
-      <div className="jcard-meta">
-        <span>{journey.duration}</span>
-        <span style={{ color: "var(--off3)" }}>·</span>
-        <span>{journey.groupSize}</span>
-        <span style={{ color: "var(--off3)" }}>·</span>
-        <span style={{ color: "var(--tq-d)", fontWeight: 600 }}>Flexible dates</span>
-      </div>
-      <div className="jcard-cta">
-        <span>Request a spot</span>
-        <span className="jcard-cta-arrow">→</span>
+      )}
+      {/* Text content */}
+      <div className="jcard-content">
+        <div className="jcard-top">
+          <div className="jcard-title">{journey.title}</div>
+          <div className="jcard-price">
+            <span style={{ fontSize: ".5rem", fontFamily: "Montserrat,sans-serif", fontWeight: 600, letterSpacing: ".06em", opacity: .7, marginRight: ".2rem", verticalAlign: "middle" }}>FROM</span>
+            ${journey.price.toLocaleString()}
+          </div>
+        </div>
+        <p className="jcard-tagline">{journey.tagline}</p>
+        <div className="jcard-meta">
+          <span>{journey.duration}</span>
+          <span style={{ color: "var(--off3)" }}>·</span>
+          <span>{journey.groupSize}</span>
+          <span style={{ color: "var(--off3)" }}>·</span>
+          <span style={{ color: "var(--tq-d)", fontWeight: 600 }}>Flexible dates</span>
+        </div>
+        <div className="jcard-cta">
+          <span>Request a spot</span>
+          <span className="jcard-cta-arrow">→</span>
+        </div>
       </div>
     </Link>
   );
