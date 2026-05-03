@@ -1582,16 +1582,14 @@ footer { background: var(--ink); padding: 1.8rem 1.1rem 1.2rem; }
   position: relative;
   padding: 1.8rem 2rem;
   border-radius: 2px;
-  isolation: isolate;
 }
 .hero-left-frost::before {
   content: "";
   position: absolute;
   inset: 0;
-  background: rgba(255, 255, 255, 0.07);
-  backdrop-filter: blur(20px) saturate(1.3);
-  -webkit-backdrop-filter: blur(20px) saturate(1.3);
-  border: 1px solid rgba(255,255,255,.14);
+  background: rgba(2, 40, 48, 0.52);
+  backdrop-filter: blur(2px);
+  -webkit-backdrop-filter: blur(2px);
   border-radius: 2px;
   z-index: -1;
 }
@@ -1612,16 +1610,14 @@ footer { background: var(--ink); padding: 1.8rem 1.1rem 1.2rem; }
 /* ── FROSTED GLASS FOR ALL HERO SECTIONS ────────────────────────── */
 .dp-hero .inner {
   position: relative;
-  isolation: isolate;
 }
 .dp-hero .inner::before {
   content: "";
   position: absolute;
   inset: -1.4rem -1.6rem;
-  background: rgba(255, 255, 255, 0.07);
-  backdrop-filter: blur(20px) saturate(1.3);
-  -webkit-backdrop-filter: blur(20px) saturate(1.3);
-  border-top: 1px solid rgba(255,255,255,.14);
+  background: rgba(2, 40, 48, 0.52);
+  backdrop-filter: blur(2px);
+  -webkit-backdrop-filter: blur(2px);
   border-radius: 2px;
   z-index: -1;
 }
