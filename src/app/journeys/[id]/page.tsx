@@ -92,7 +92,6 @@ export default async function JourneyDetailPage({ params }: Props) {
               </div>
             )}
             </div>{/* end hero-text-block */}
-            </div>{/* end hero-text-block */}
           </div>
         </div>
 

@@ -69,6 +69,7 @@ export default function ExperiencesPage() {
               </Link>
             </div>
             </div>
+            </div>{/* end hero-text-block */}
           </div>
         </div>
 

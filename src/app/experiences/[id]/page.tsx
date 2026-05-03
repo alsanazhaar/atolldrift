@@ -61,6 +61,7 @@ export default async function ExperienceDetailPage({ params }: Props) {
               <span>★ {xp.rating} ({xp.ratingCount} reviews)</span>
             </div>
             </div>
+            </div>{/* end hero-text-block */}
           </div>
         </div>
 
