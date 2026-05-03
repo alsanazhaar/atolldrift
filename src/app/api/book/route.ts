@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 import { Resend } from "resend";
-import { submitBookingRequest } from "@/lib/data";
+import { saveBookingRequest } from "@/lib/data";
 
 const resend = new Resend(process.env.RESEND_API_KEY);
 const ADMIN = process.env.CONTACT_EMAIL || "";
@@ -16,7 +16,7 @@ export async function POST(req: NextRequest) {
     }
 
     // Save to Supabase
-    const result = await submitBookingRequest({
+    const result = await saveBookingRequest({
       type, itemId, guestName, guestEmail,
       guestCount: guestCount ?? 1, preferredDate, notes,
     });
