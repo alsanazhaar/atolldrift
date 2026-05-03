@@ -118,6 +118,7 @@ export default async function AtollPage({ params }: Props) {
   const atoll = atolls.find((a) => a.id === params.id);
   if (!atoll) notFound();
 
+  const hasPhoto = !!atoll.photo?.main?.src;
   const journeys = allJourneys.filter((j) => j.atollId === atoll.id);
   const experiences = allExperiences.filter((x) =>
     x.atoll.toLowerCase() === atoll.name.toLowerCase()
