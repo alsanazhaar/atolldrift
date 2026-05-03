@@ -39,6 +39,16 @@ export default async function ExperienceDetailPage({ params }: Props) {
         <div style={{ background: "var(--tq)", padding: "2rem 1.1rem 1.8rem", position: "relative", overflow: "hidden" }}>
           <TealBannerBg src={(xp as any).bannerSrc ?? null} />
           <div className="inner" style={{ position: "relative", zIndex: 2 }}>
+            {/* Frosted background panel behind text */}
+            <div style={{
+              position: "absolute",
+              inset: "-1.4rem -1.6rem",
+              background: "rgba(2, 28, 34, 0.55)",
+              backdropFilter: "blur(2px)",
+              WebkitBackdropFilter: "blur(2px)",
+              borderRadius: "2px",
+              zIndex: -1,
+            }} />
             <Link href="/experiences" className="dp-back">← Back to Experiences</Link>
             <div className={`exp-cat ${xp.catClass}`} style={{ display: "inline-block", marginBottom: ".5rem" }}>{xp.catLabel}</div>
             <h1 style={{ fontFamily: "Georgia,serif", fontSize: "clamp(1.5rem,5.5vw,2rem)", color: "var(--white)", lineHeight: 1.1, marginBottom: ".55rem" }}>

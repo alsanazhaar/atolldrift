@@ -148,6 +148,16 @@ export default async function AtollPage({ params }: Props) {
           )}
 
           <div className="inner" style={{ position: "relative", zIndex: 2 }}>
+            {/* Frosted background panel behind text */}
+            <div style={{
+              position: "absolute",
+              inset: "-1.4rem -1.6rem",
+              background: "rgba(2, 28, 34, 0.55)",
+              backdropFilter: "blur(2px)",
+              WebkitBackdropFilter: "blur(2px)",
+              borderRadius: "2px",
+              zIndex: -1,
+            }} />
             <Link href="/" className="dp-back">← Home</Link>
 
             <div style={{ display: "flex", alignItems: "center", gap: ".5rem", margin: ".5rem 0" }}>

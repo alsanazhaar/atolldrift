@@ -52,6 +52,16 @@ export default function ExperiencesPage() {
             <circle cx="110" cy="110" r="28" stroke="white" strokeWidth="0.8" fill="none" />
           </svg>
           <div className="inner" style={{ position: "relative", zIndex: 2 }}>
+            {/* Frosted background panel behind text */}
+            <div style={{
+              position: "absolute",
+              inset: "-1.4rem -1.6rem",
+              background: "rgba(2, 28, 34, 0.55)",
+              backdropFilter: "blur(2px)",
+              WebkitBackdropFilter: "blur(2px)",
+              borderRadius: "2px",
+              zIndex: -1,
+            }} />
             <div className="mkt-kicker">Southern Maldives · Local Experiences</div>
             <h1>Experiences from people<br /><em>who live here.</em></h1>
             <p>
