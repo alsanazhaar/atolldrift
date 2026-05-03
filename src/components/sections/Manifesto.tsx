@@ -37,10 +37,10 @@ export default function Manifesto() {
             style={{ objectFit: "cover", objectPosition: "center" }}
             sizes="100vw"
           />
-          {/* Dark overlay so text stays readable over any photo */}
+          {/* Dark gradient overlay — no teal tint */}
           <div style={{
             position: "absolute", inset: 0,
-            background: "rgba(10, 100, 115, 0.72)",
+            background: "linear-gradient(to bottom, rgba(0,0,0,.15) 0%, rgba(0,0,0,.45) 100%)",
             zIndex: 1,
           }} />
         </>

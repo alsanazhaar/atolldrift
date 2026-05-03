@@ -27,10 +27,9 @@ export function usePageBanner(page: string) {
 // If no src, section renders as plain teal (existing behaviour).
 interface TealBannerProps {
   src: string | null;
-  overlay?: number; // opacity 0–1, default 0.72
 }
 
-export function TealBannerBg({ src, overlay = 0.72 }: TealBannerProps) {
+export function TealBannerBg({ src }: TealBannerProps) {
   if (!src) return null;
   return (
     <>
