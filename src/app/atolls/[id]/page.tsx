@@ -161,7 +161,7 @@ export default async function AtollPage({ params }: Props) {
                 </a>
               )}
               <Link href="/journeys" className="btn-g" style={{ textDecoration: "none", display: "inline-flex", alignItems: "center" }}>
-                All departures
+                All journeys
               </Link>
             </div>
             </div>{/* end max-width wrapper */}
@@ -285,7 +285,7 @@ export default async function AtollPage({ params }: Props) {
           </p>
           <div style={{ display: "flex", gap: ".55rem", justifyContent: "center", flexWrap: "wrap" }}>
             <Link href={`/journeys?atoll=${atoll.id}`} className="btn-p" style={{ textDecoration: "none", display: "inline-flex", alignItems: "center" }}>
-              View departures
+              View journeys
             </Link>
             <Link href="/experiences" className="btn-g" style={{ textDecoration: "none", display: "inline-flex", alignItems: "center" }}>
               Browse experiences

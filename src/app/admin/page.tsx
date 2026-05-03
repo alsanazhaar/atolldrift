@@ -1405,7 +1405,6 @@ export default function AdminPage() {
 
   const NAV: { id: Section; label: string }[] = [
     { id: "journeys",   label: "Journeys" },
-    { id: "departures", label: "Departures" },
     { id: "experiences",label: "Experiences" },
     { id: "atolls",     label: "Atolls" },
     { id: "hero",       label: "Hero Images" },
@@ -1471,7 +1470,6 @@ export default function AdminPage() {
             {NAV.find(n => n.id === section)?.label}
           </div>
           {section === "journeys"    && <JourneysSection    toast={showToast} />}
-          {section === "departures"  && <DeparturesSection  toast={showToast} />}
           {section === "experiences" && <ExperiencesSection toast={showToast} />}
           {section === "atolls"      && <AtollsSection      toast={showToast} />}
           {section === "hero"        && <HeroSection        toast={showToast} />}

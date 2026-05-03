@@ -114,8 +114,8 @@ export default function Hero() {
             <button className="btn-p" onClick={() => document.getElementById("sec-huvadhu")?.scrollIntoView({ behavior: "smooth" })}>
               Explore the Three Atolls
             </button>
-            <button className="btn-g" onClick={() => document.getElementById("sec-departures")?.scrollIntoView({ behavior: "smooth" })}>
-              View Departures
+            <button className="btn-g" onClick={() => document.getElementById("sec-journeys")?.scrollIntoView({ behavior: "smooth" })}>
+              View Journeys
             </button>
           </div>
         </div>

@@ -38,7 +38,7 @@ export default function Footer() {
           <div>
             <div className="fh">Journeys</div>
             <ul className="flinks">
-              <li><Link href="/journeys">All Departures</Link></li>
+              <li><Link href="/journeys">All Journeys</Link></li>
               <li><Link href="/journeys/huvadhu-deep">Huvadhu Deep</Link></li>
               <li><Link href="/journeys/fuva-channel">Island &amp; Ocean</Link></li>
               <li><Link href="/journeys/addu-south">Southern End</Link></li>

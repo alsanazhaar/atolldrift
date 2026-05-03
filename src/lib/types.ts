@@ -37,22 +37,6 @@ export interface Atoll {
   whyThisAtoll?: string | null;
 }
 
-export interface Departure {
-  id?: number;
-  date: string;
-  spots: number;
-  spotsLabel: string;
-  kind: string;
-  status: JourneyStatus;
-  price: number;
-}
-
-export interface DayItem {
-  label: string;
-  title: string;
-  desc: string;
-}
-
 export interface Journey {
   id: string;
   atollId: string;
@@ -67,7 +51,6 @@ export interface Journey {
   goldAccent: boolean;
   included: string[];
   days: DayItem[];
-  departures: Departure[];
 }
 
 export interface Experience {

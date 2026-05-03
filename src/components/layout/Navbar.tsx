@@ -133,7 +133,7 @@ export default function Navbar() {
         <Link href="/atolls/fuvahmulah" onClick={closeMenu}>Fuvahmulah · 0°17′ S</Link>
         <Link href="/atolls/addu" onClick={closeMenu}>Addu · 0°41′ S</Link>
         <Link href="/journeys" onClick={closeMenu} style={{ color: "var(--tq-d)", fontWeight: 600 }}>
-          View All Departures
+          View All Journeys
         </Link>
         <Link href="/experiences" onClick={closeMenu}>
           Local Experiences

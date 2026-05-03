@@ -9,7 +9,7 @@ const FROM = "AtollDrift <onboarding@resend.dev>";
 export async function POST(req: NextRequest) {
   try {
     const body = await req.json();
-    const { type, itemId, guestName, guestEmail, guestCount, departureId, preferredDate, notes } = body;
+    const { type, itemId, guestName, guestEmail, guestCount, preferredDate, notes } = body;
 
     if (!guestName || !guestEmail || !itemId || !type) {
       return NextResponse.json({ error: "Missing required fields" }, { status: 400 });
@@ -17,7 +17,7 @@ export async function POST(req: NextRequest) {
 
     // Save to Supabase
     const result = await submitBookingRequest({
-      type, itemId, departureId, guestName, guestEmail,
+      type, itemId, guestName, guestEmail,
       guestCount: guestCount ?? 1, preferredDate, notes,
     });
 
@@ -40,7 +40,7 @@ export async function POST(req: NextRequest) {
           from: FROM,
           to: ADMIN,
           subject: `New ${type} request — ${guestName}`,
-          html: adminNotificationHtml({ guestName, guestEmail, type, itemId, guestCount: guestCount ?? 1, preferredDate, departureId, notes }),
+          html: adminNotificationHtml({ guestName, guestEmail, type, itemId, guestCount: guestCount ?? 1, preferredDate, notes }),
         }));
       }
       await Promise.all(emails);
@@ -57,7 +57,7 @@ export async function POST(req: NextRequest) {
 function guestConfirmationHtml({ guestName, itemId, preferredDate }: { guestName: string; itemId: string; preferredDate?: string }) {
   const journeyName = itemId.split("-").map((w: string) => w.charAt(0).toUpperCase() + w.slice(1)).join(" ");
   const dateLine = preferredDate
-    ? `<p style="margin:0 0 16px;font-size:15px;color:#1E5060;line-height:1.7;">Your preferred departure date is <strong style="color:#022830;">${preferredDate}</strong>.</p>`
+    ? `<p style="margin:0 0 16px;font-size:15px;color:#1E5060;line-height:1.7;">Your requested arrival date is <strong style="color:#022830;">${preferredDate}</strong>.</p>`
     : "";
 
   return `<!DOCTYPE html><html><head><meta charset="utf-8"></head>
@@ -102,7 +102,6 @@ function adminNotificationHtml({ guestName, guestEmail, type, itemId, guestCount
     ${row("Journey", itemId)}
     ${row("Guests", String(guestCount))}
     ${preferredDate ? row("Date", preferredDate) : ""}
-    ${departureId ? row("Departure ID", String(departureId)) : ""}
     ${notes ? row("Notes", notes) : ""}
   </table>
   <p style="margin:20px 0 0;font-size:12px;color:#999;">Manage in admin → /admin → Bookings</p>

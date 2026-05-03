@@ -143,14 +143,6 @@ export const atolls: Atoll[] = [
 
 // ── JOURNEYS ──────────────────────────────────────────────────────────
 
-export interface Departure {
-  date: string;
-  spots: number;
-  spotsLabel: string;
-  kind: string;
-  status: JourneyStatus;
-  price: number;
-}
 
 export interface DayItem {
   label: string;
@@ -171,7 +163,6 @@ export interface Journey {
   coord: string;
   included: string[];
   days: DayItem[];
-  departures: Departure[];
   goldAccent?: boolean;
 }
 
@@ -196,11 +187,6 @@ export const journeys: Journey[] = [
       { label: "Day 8–9", title: "Deep reef & fishing", desc: "Night fishing with local fishermen. Snorkel the outer reef at sunrise." },
       { label: "Day 10", title: "Departure", desc: "Morning at leisure. Afternoon flight back to Malé." },
     ],
-    departures: [
-      { date: "14 Feb 2025", spots: 4, spotsLabel: "4 spots remaining", kind: "Group", status: "hot", price: 1850 },
-      { date: "3 Mar 2025", spots: 8, spotsLabel: "8 spots open", kind: "Group", status: "open", price: 1850 },
-      { date: "15 Apr 2025", spots: 10, spotsLabel: "10 spots open", kind: "Private available", status: "open", price: 1850 },
-    ],
   },
   {
     id: "huvadhu-surf",
@@ -219,10 +205,6 @@ export const journeys: Journey[] = [
       { label: "Day 2–5", title: "Surf sessions", desc: "Morning and afternoon sessions at the passes. Village evenings." },
       { label: "Day 6", title: "Fishing at dawn", desc: "Join the local fishermen for the early morning run." },
       { label: "Day 7", title: "Departure", desc: "Final surf session if conditions allow. Afternoon flight." },
-    ],
-    departures: [
-      { date: "3 Mar 2025", spots: 8, spotsLabel: "8 spots open", kind: "Group", status: "open", price: 1490 },
-      { date: "22 Mar 2025", spots: 8, spotsLabel: "8 spots open", kind: "Group", status: "open", price: 1490 },
     ],
   },
   {
@@ -244,10 +226,6 @@ export const journeys: Journey[] = [
       { label: "Day 5–6", title: "Lacquerwork & crafts", desc: "Full days with the liyelaa jahdhu artisans. Watch the process. Take something home." },
       { label: "Day 7", title: "At your own pace", desc: "Free day. Walk the island perimeter. Swim in the channel if conditions allow." },
       { label: "Day 8", title: "Departure", desc: "Morning market visit. Afternoon flight." },
-    ],
-    departures: [
-      { date: "22 Feb 2025", spots: 3, spotsLabel: "3 spots remaining", kind: "Group", status: "hot", price: 1980 },
-      { date: "10 Mar 2025", spots: 8, spotsLabel: "8 spots open", kind: "Group", status: "open", price: 1980 },
     ],
     goldAccent: true,
   },
@@ -271,10 +249,6 @@ export const journeys: Journey[] = [
       { label: "Day 8", title: "Fishing & community", desc: "A day with the fishing community. Join the morning run." },
       { label: "Day 9", title: "Departure", desc: "Morning at leisure. Afternoon flight." },
     ],
-    departures: [
-      { date: "28 Feb 2025", spots: 7, spotsLabel: "7 spots open", kind: "Group", status: "open", price: 1750 },
-      { date: "5 Apr 2025", spots: 10, spotsLabel: "10 spots open", kind: "Group", status: "open", price: 1750 },
-    ],
     goldAccent: true,
   },
   {
@@ -293,10 +267,6 @@ export const journeys: Journey[] = [
       { label: "Day 1", title: "Arrival & check dive", desc: "Afternoon arrival. Easy check dive in the lagoon." },
       { label: "Day 2–5", title: "Maakandu channel", desc: "Morning and afternoon dives. Different sites each day. Night dive on Day 4." },
       { label: "Day 6", title: "Departure", desc: "Morning dive if conditions allow. Afternoon flight." },
-    ],
-    departures: [
-      { date: "8 Mar 2025", spots: 6, spotsLabel: "6 spots open", kind: "Group", status: "open", price: 1380 },
-      { date: "20 Apr 2025", spots: 8, spotsLabel: "8 spots open", kind: "Group", status: "open", price: 1380 },
     ],
     goldAccent: true,
   },
@@ -450,10 +420,3 @@ export const experiences: Experience[] = [
 
 // ── DEPARTURES (for group section) ───────────────────────────────────
 
-export const allDepartures = [
-  { atoll: "Huvadhu", atollClass: "th", journey: "Huvadhu Deep — 10 Days", date: "14 Feb 2025", spots: 4, spotsLabel: "4 spots", status: "hot" as const, journeyId: "huvadhu-deep" },
-  { atoll: "Fuvahmulah", atollClass: "th", journey: "Island & Ocean — 8 Days", date: "22 Feb 2025", spots: 3, spotsLabel: "3 spots", status: "hot" as const, journeyId: "fuva-channel" },
-  { atoll: "Huvadhu", atollClass: "th", journey: "Surf & Village — 7 Days", date: "3 Mar 2025", spots: 8, spotsLabel: "8 spots", status: "open" as const, journeyId: "huvadhu-surf" },
-  { atoll: "Addu", atollClass: "th", journey: "Southern End — 9 Days", date: "28 Feb 2025", spots: 7, spotsLabel: "7 spots", status: "open" as const, journeyId: "addu-south" },
-  { atoll: "Addu", atollClass: "th", journey: "Maakandu Dive — 6 Days", date: "8 Mar 2025", spots: 6, spotsLabel: "6 spots", status: "open" as const, journeyId: "addu-dive" },
-];

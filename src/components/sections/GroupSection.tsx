@@ -20,7 +20,6 @@ interface Journey {
 }
 
 interface GroupSectionProps {
-  departures?: any[];
   journeys?: Journey[];
 }
 
@@ -38,7 +37,7 @@ export default function GroupSection({ journeys = [] }: GroupSectionProps) {
   const featured = journeys.slice(0, 6);
 
   return (
-    <section className="group-sec" id="sec-departures">
+    <section className="group-sec" id="sec-journeys">
       <div className="inner">
         <div className="group-left">
           <h2 className="group-title">Popular Journeys</h2>

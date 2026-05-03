@@ -1,7 +1,7 @@
 import { createClient } from "@supabase/supabase-js";
 import type { Atoll, Journey, Experience, Story, StoryImage } from "@/lib/types";
 // Types re-exported from types.ts for convenience
-export type { Atoll, Journey, Experience, Departure, DayItem, ExperienceCategory } from "@/lib/types";
+export type { Atoll, Journey, Experience, DayItem, ExperienceCategory } from "@/lib/types";
 
 function db() {
   return createClient(
@@ -39,7 +39,7 @@ export async function getAtolls(): Promise<Atoll[]> {
 
 export async function getJourneys(): Promise<Journey[]> {
   const { data, error } = await db().from("journeys")
-    .select("*, banner_src, journey_included(item,sort_order), journey_days(label,title,description,sort_order), departures(id,date,spots,spots_label,kind,status,price)")
+    .select("*, banner_src, journey_included(item,sort_order), journey_days(label,title,description,sort_order)")
     .order("atoll_id");
   if (error || !data) { console.error("[AtollDrift] getJourneys:", error?.message); return []; }
   return data.map((row: any) => ({
@@ -50,7 +50,6 @@ export async function getJourneys(): Promise<Journey[]> {
     bannerSrc: row.banner_src ?? null,
     included: (row.journey_included??[]).sort((a:any,b:any)=>a.sort_order-b.sort_order).map((i:any)=>i.item),
     days: (row.journey_days??[]).sort((a:any,b:any)=>a.sort_order-b.sort_order).map((d:any)=>({label:d.label,title:d.title,desc:d.description})),
-    departures: (row.departures??[]).map((d:any)=>({id:d.id,date:d.date,spots:d.spots,spotsLabel:d.spots_label,kind:d.kind,status:d.status as "hot"|"open"|"soldout",price:d.price})),
   }));
 }
 
@@ -80,24 +79,9 @@ export async function getExperienceById(id: string): Promise<Experience | null> 
   const experiences = await getExperiences();
   return experiences.find((x) => x.id === id) ?? null;
 }
-
-export async function getUpcomingDepartures() {
-  const { data, error } = await db().from("departures")
-    .select("*, journeys(title, atoll_id)").neq("status","soldout").order("created_at").limit(6);
-  if (error || !data?.length) { console.error("[AtollDrift] getUpcomingDepartures:", error?.message); return []; }
-  return data.map((d: any) => ({
-    atoll: d.journeys?.atoll_id ?? "", atollClass: "th",
-    journey: d.journeys?.title ?? "", date: d.date, spots: d.spots,
-    spotsLabel: d.spots_label, status: d.status as "hot"|"open", journeyId: d.journey_id,
-  }));
-}
-
-export async function submitBookingRequest(payload: {
-  type: "journey"|"experience"; itemId: string; departureId?: number;
-  guestName: string; guestEmail: string; guestCount: number; preferredDate?: string; notes?: string;
-}) {
+) {
   const { error } = await db().from("booking_requests").insert({
-    type: payload.type, item_id: payload.itemId, departure_id: payload.departureId ?? null,
+    type: payload.type, item_id: payload.itemId, departure_id: null,
     guest_name: payload.guestName, guest_email: payload.guestEmail,
     guest_count: payload.guestCount, preferred_date: payload.preferredDate ?? null,
     notes: payload.notes ?? null,
