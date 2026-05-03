@@ -803,7 +803,7 @@ footer { background: var(--ink); padding: 1.8rem 1.1rem 1.2rem; }
 .fb { border-top: 1px solid rgba(255, 255, 255, .1); padding-top: .72rem; font-size: .6rem; text-align: center; color: rgba(255, 255, 255, .38); }
 
 /* ── MARKETPLACE ──────────────────────────────────────────────────── */
-.mkt-hero { background: var(--tq); padding: 2.4rem 1.1rem 2rem; position: relative; overflow: hidden; min-height: 50vh; display: flex; flex-direction: column; justify-content: flex-end; }
+.mkt-hero { background: var(--tq); padding: 2.4rem 1.1rem 2rem; position: relative; overflow: hidden; min-height: 50vh; display: flex; flex-direction: column; justify-content: flex-end; align-items: flex-start; }
 .mkt-hero-bg { position: absolute; right: -20px; bottom: -20px; opacity: .08; pointer-events: none; }
 .mkt-kicker { font-size: .58rem; letter-spacing: .18em; text-transform: uppercase; color: rgba(255, 255, 255, .8); margin-bottom: .6rem; }
 .mkt-hero h1 { font-family: Georgia, serif; font-size: clamp(1.6rem, 5.5vw, 2.2rem); color: var(--white); line-height: 1.1; margin-bottom: .5rem; }
@@ -1666,7 +1666,8 @@ footer { background: var(--ink); padding: 1.8rem 1.1rem 1.2rem; }
 }
 
 /* Text sits above the gradient — override centred inner to use full page width */
-.dp-hero .inner {
+.dp-hero .inner,
+.mkt-hero .inner {
   position: relative;
   z-index: 2;
   max-width: 100%;
