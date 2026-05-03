@@ -1576,3 +1576,67 @@ footer { background: var(--ink); padding: 1.8rem 1.1rem 1.2rem; }
 @media (max-width: 899px) {
   .dp-sidebar { display: none; }
 }
+
+/* ── HERO FROSTED GLASS TEXT PANEL ──────────────────────────────── */
+.hero-left-frost {
+  position: relative;
+  padding: 1.8rem 2rem;
+  border-radius: 2px;
+}
+.hero-left-frost::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: rgba(255, 255, 255, 0.06);
+  backdrop-filter: blur(18px) saturate(1.2);
+  -webkit-backdrop-filter: blur(18px) saturate(1.2);
+  border: 1px solid rgba(255,255,255,.12);
+  border-radius: 2px;
+  z-index: -1;
+}
+
+/* Keep text shadows for extra readability */
+.hero-left-frost h1,
+.hero-left-frost .hero-tagline,
+.hero-left-frost .hero-body {
+  text-shadow: 0 1px 8px rgba(0,0,0,.2);
+}
+
+@media (max-width: 899px) {
+  .hero-left-frost {
+    padding: 1.4rem 1.2rem;
+  }
+}
+
+/* ── FROSTED GLASS FOR ALL HERO SECTIONS ────────────────────────── */
+/* Applied to text containers inside .dp-hero — affects journey,
+   experience, atoll, journeys list, and experiences list pages    */
+.dp-hero .inner {
+  position: relative;
+}
+.dp-hero .inner::before {
+  content: "";
+  position: absolute;
+  inset: -1.4rem -1.6rem;
+  background: rgba(255, 255, 255, 0.07);
+  backdrop-filter: blur(18px) saturate(1.2);
+  -webkit-backdrop-filter: blur(18px) saturate(1.2);
+  border-top: 1px solid rgba(255,255,255,.12);
+  border-radius: 2px;
+  z-index: -1;
+}
+
+/* Text shadows for all hero headings */
+.dp-hero .inner h1,
+.dp-hero .inner .dp-title,
+.dp-hero .inner .dp-tagline,
+.dp-hero .inner .dp-coord,
+.dp-hero .inner .dp-hemi {
+  text-shadow: 0 1px 8px rgba(0,0,0,.25);
+}
+
+@media (max-width: 599px) {
+  .dp-hero .inner::before {
+    inset: -1rem -1.1rem;
+  }
+}

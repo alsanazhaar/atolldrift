@@ -143,7 +143,7 @@ export default async function AtollPage({ params }: Props) {
                   priority
                 />
               </div>
-              <div style={{ position: "absolute", inset: 0, background: "rgba(10,123,140,0.78)", zIndex: 1 }} />
+              <div style={{ position: "absolute", inset: 0, background: "linear-gradient(to bottom, rgba(0,0,0,.25) 0%, transparent 30%, rgba(0,0,0,.15) 70%, rgba(0,0,0,.45) 100%)", zIndex: 1 }} />
             </>
           )}
 
