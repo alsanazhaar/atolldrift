@@ -130,7 +130,7 @@ export default async function AtollPage({ params }: Props) {
       <main>
 
         {/* ── Hero ── */}
-        <div style={{ background: "var(--tq)", padding: "2.5rem 1.1rem 2rem", position: "relative", overflow: "hidden" }}>
+        <div style={{ background: "#0d1f24", padding: "2.5rem 1.1rem 2rem", position: "relative", overflow: "hidden", minHeight: "65vh", display: "flex", flexDirection: "column", justifyContent: "flex-end" }}>
           {/* Background photo if available */}
           {hasPhoto && (
             <>
@@ -143,22 +143,12 @@ export default async function AtollPage({ params }: Props) {
                   priority
                 />
               </div>
-              <div style={{ position: "absolute", inset: 0, background: "linear-gradient(to bottom, rgba(0,0,0,.25) 0%, transparent 30%, rgba(0,0,0,.15) 70%, rgba(0,0,0,.45) 100%)", zIndex: 1 }} />
+              <div style={{ position: "absolute", inset: 0, background: "linear-gradient(to bottom, rgba(0,0,0,.15) 0%, transparent 25%, rgba(0,0,0,.5) 65%, rgba(0,0,0,.78) 100%)", zIndex: 1 }} />
             </>
           )}
 
           <div className="inner" style={{ position: "relative", zIndex: 2 }}>
-            {/* Frosted glass panel behind text */}
-            <div style={{
-              position: "absolute",
-              inset: "-1.4rem -1.6rem",
-              background: "rgba(255, 255, 255, 0.12)",
-              backdropFilter: "blur(16px) saturate(1.4)",
-              WebkitBackdropFilter: "blur(16px) saturate(1.4)",
-              border: "1px solid rgba(255, 255, 255, 0.18)",
-              borderRadius: "2px",
-              zIndex: -1,
-            }} />
+
             <Link href="/" className="dp-back">← Home</Link>
 
             <div style={{ display: "flex", alignItems: "center", gap: ".5rem", margin: ".5rem 0" }}>

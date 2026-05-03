@@ -27,17 +27,7 @@ export default async function JourneysPage() {
         <div className="dp-hero" style={{ position: "relative", overflow: "hidden" }}>
           <JourneysBanner />
           <div className="inner" style={{ position: "relative", zIndex: 2 }}>
-            {/* Frosted glass panel behind text */}
-            <div style={{
-              position: "absolute",
-              inset: "-1.4rem -1.6rem",
-              background: "rgba(255, 255, 255, 0.12)",
-              backdropFilter: "blur(16px) saturate(1.4)",
-              WebkitBackdropFilter: "blur(16px) saturate(1.4)",
-              border: "1px solid rgba(255, 255, 255, 0.18)",
-              borderRadius: "2px",
-              zIndex: -1,
-            }} />
+
             <Link href="/" className="dp-back">← Back to home</Link>
             <div className="dp-coord">Southern Maldives · Small Group Journeys</div>
             <h1 className="dp-title">Featured Journeys</h1>

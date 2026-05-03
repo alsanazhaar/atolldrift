@@ -1608,19 +1608,9 @@ footer { background: var(--ink); padding: 1.8rem 1.1rem 1.2rem; }
   }
 }
 
-/* ── FROSTED GLASS FOR ALL HERO SECTIONS ────────────────────────── */
+/* ── HERO TEXT READABILITY ───────────────────────────────────────── */
 .dp-hero .inner {
   position: relative;
-}
-.dp-hero .inner::before {
-  content: "";
-  position: absolute;
-  inset: -1.4rem -1.6rem;
-  background: rgba(2, 40, 48, 0.52);
-  backdrop-filter: blur(2px);
-  -webkit-backdrop-filter: blur(2px);
-  border-radius: 2px;
-  z-index: -1;
 }
 
 /* Text shadows for all hero headings */
@@ -1636,4 +1626,14 @@ footer { background: var(--ink); padding: 1.8rem 1.1rem 1.2rem; }
   .dp-hero .inner::before {
     inset: -1rem -1.1rem;
   }
+}
+
+/* ── DP-HERO TEXT READABILITY ────────────────────────────────────── */
+.dp-hero .dp-title,
+.dp-hero .dp-tagline,
+.dp-hero .dp-coord,
+.dp-hero .dp-hemi,
+.dp-hero .dp-back,
+.dp-hero h1 {
+  text-shadow: 0 2px 12px rgba(0,0,0,.5), 0 1px 3px rgba(0,0,0,.4);
 }

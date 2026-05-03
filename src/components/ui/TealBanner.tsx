@@ -46,13 +46,13 @@ export function TealBannerBg({ src, overlay = 0.72 }: TealBannerProps) {
           zIndex: 0,
         }}
       />
-      {/* Dark gradient — top vignette for nav, bottom for text readability. No teal tint. */}
+      {/* Strong bottom gradient — no teal tint, just darkness for text readability */}
       <div
         aria-hidden="true"
         style={{
           position: "absolute",
           inset: 0,
-          background: "linear-gradient(to bottom, rgba(0,0,0,.25) 0%, transparent 30%, rgba(0,0,0,.15) 70%, rgba(0,0,0,.45) 100%)",
+          background: "linear-gradient(to bottom, rgba(0,0,0,.15) 0%, transparent 25%, rgba(0,0,0,.5) 65%, rgba(0,0,0,.8) 100%)",
           zIndex: 1,
         }}
       />
