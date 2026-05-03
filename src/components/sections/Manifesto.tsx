@@ -15,7 +15,7 @@ export default function Manifesto() {
           observer.unobserve(el);
         }
       },
-      { threshold: 0.15 }
+      { threshold: 0.1 }
     );
     observer.observe(el);
     return () => observer.disconnect();
@@ -30,24 +30,46 @@ export default function Manifesto() {
           <div className="m-eq-rule" />
         </div>
 
-        <h2>
-          The Maldives you have seen is not the Maldives.
-        </h2>
+        <div className="m-body">
 
-        <p>
-          The overwater bungalow, the white sand, the infinity pool — these are real, and they
-          are beautiful, and they are on a different set of islands from the ones we work in.
-          The southern atolls are where the fishermen live, where the boats are built, where
-          the ocean is read by feel and not by app.{" "}
-          <em>We take small groups there.</em>
-        </p>
+          {/* Main headline */}
+          <h2 className="m-headline">
+            The Maldives you have seen<br />
+            is not the Maldives.
+          </h2>
 
-        <p>
-          Six to ten people. Local guesthouses. Meals with families who cook what they grow.
-          Guides who grew up on the water they are showing you.{" "}
-          <em>This is not adventure tourism.</em> It is the Maldives before it became a
-          product — and it is still there, if you know where to cross.
-        </p>
+          {/* Short punchy lines — medium size, create rhythm */}
+          <div className="m-lines">
+            <p className="m-line">The overwater bungalow, the white sand, the infinity pool —</p>
+            <p className="m-line">these are real, and they are beautiful.</p>
+            <p className="m-line m-line-space">They are on a different set of islands<br />from the ones we work in.</p>
+          </div>
+
+          {/* Supporting paragraph — smaller, prose */}
+          <p className="m-para">
+            The southern atolls are where the fishermen live, where the boats
+            are built, where the ocean is read by feel and not by app.
+          </p>
+
+          {/* Italic statement line */}
+          <p className="m-statement">
+            <em>We take small groups there.</em>
+          </p>
+
+          {/* Second prose block */}
+          <p className="m-para m-para-top">
+            Six to ten people. Local guesthouses. Meals with families
+            who cook what they grow. Guides who grew up on the water
+            they are showing you.
+          </p>
+
+          {/* Final statement */}
+          <p className="m-statement m-statement-final">
+            <em>This is the Maldives before it became a product.</em><br />
+            <span>It is still there, if you know where to cross.</span>
+          </p>
+
+        </div>
       </div>
     </section>
   );
