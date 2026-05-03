@@ -923,7 +923,7 @@ footer { background: var(--ink); padding: 1.8rem 1.1rem 1.2rem; }
 .reveal-right.visible { opacity: 1; transform: translateX(0); }
 
 /* ── DETAIL PAGES ─────────────────────────────────────────────────── */
-.dp-hero { background: #0d1f24; padding: 2rem 1.1rem 1.8rem; min-height: 50vh; display: flex; flex-direction: column; justify-content: flex-end; }
+.dp-hero { background: #0d1f24; padding: 2rem 1.1rem 1.8rem; min-height: 50vh; display: flex; flex-direction: column; justify-content: flex-end; align-items: flex-start; }
 .dp-back {
   font-size: .65rem;
   letter-spacing: .09em;
@@ -1657,11 +1657,12 @@ footer { background: var(--ink); padding: 1.8rem 1.1rem 1.2rem; }
 /* ── HERO TEXT BLOCK — frosted glass, left-aligned, consistent across all pages ── */
 .hero-text-block {
   position: relative;
-  display: inline-block;
-  max-width: 580px;
-  width: 100%;
+  display: block;
+  max-width: 560px;
+  width: fit-content;
   padding: 1.6rem 1.8rem;
   text-align: left;
+  margin-right: auto;
 }
 .hero-text-block::before {
   content: "";
@@ -1678,7 +1679,6 @@ footer { background: var(--ink); padding: 1.8rem 1.1rem 1.2rem; }
 @media (max-width: 599px) {
   .hero-text-block {
     padding: 1.2rem 1.1rem;
-    max-width: 100%;
-    display: block;
+    width: 100%;
   }
 }

@@ -130,7 +130,7 @@ export default async function AtollPage({ params }: Props) {
       <main>
 
         {/* ── Hero ── */}
-        <div style={{ background: "#0d1f24", padding: "2.5rem 1.1rem 2rem", position: "relative", overflow: "hidden", minHeight: "58vh", display: "flex", flexDirection: "column", justifyContent: "flex-end" }}>
+        <div style={{ background: "#0d1f24", padding: "2.5rem 1.1rem 2rem", position: "relative", overflow: "hidden", minHeight: "58vh", display: "flex", flexDirection: "column", justifyContent: "flex-end", alignItems: "flex-start" }}>
           {/* Background photo if available */}
           {hasPhoto && (
             <>
