@@ -41,7 +41,7 @@ function HeroSlideshow() {
           }} />
         ))}
       </div>
-      <div style={{ position: "absolute", inset: 0, background: "rgba(10,123,140,0.72)", zIndex: 1 }} />
+      <div style={{ position: "absolute", inset: 0, background: "linear-gradient(to bottom, rgba(0,0,0,.2) 0%, transparent 25%)", zIndex: 1 }} />
       {images.length > 1 && (
         <div style={{ position: "absolute", bottom: "1rem", left: "50%", transform: "translateX(-50%)", display: "flex", gap: ".45rem", zIndex: 10 }}>
           {images.map((_, i) => (
@@ -94,7 +94,7 @@ export default function Hero() {
       <HeroSlideshow />
       <HeroBgMotif />
       <div className="inner" style={{ position: "relative", zIndex: 2 }}>
-        <div className="hero-left">
+        <div className="hero-left hero-left-frost">
           <div className="hero-coord">Indian Ocean · 73°E · Southern Maldives</div>
           <h1>You may have been<br />to the Maldives.<br /><em>But have you seen it?</em></h1>
           <div className="hero-tagline">Have you <span className="seen">seen</span> the Maldives?</div>
