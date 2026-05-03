@@ -355,13 +355,19 @@ nav {
   position: relative;
 }
 .ha {
-  background: rgba(255, 255, 255, .12);
-  border: 1.5px solid rgba(255, 255, 255, .22);
+  background: rgba(255, 255, 255, 0.12);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-top: 1px solid rgba(255, 255, 255, 0.35);
   padding: .65rem .7rem;
   cursor: pointer;
   transition: all .2s;
+  backdrop-filter: blur(16px) saturate(1.4);
+  -webkit-backdrop-filter: blur(16px) saturate(1.4);
 }
-.ha:active, .ha:hover { background: rgba(255, 255, 255, .25); }
+.ha:active, .ha:hover {
+  background: rgba(255, 255, 255, .22);
+  border-color: rgba(255, 255, 255, .4);
+}
 .ha-hemi {
   font-size: .5rem;
   letter-spacing: .1em;
@@ -369,7 +375,7 @@ nav {
   color: rgba(255, 255, 255, .75);
   margin-bottom: .12rem;
 }
-.ha-name { font-family: Georgia, serif; font-size: .88rem; color: var(--white); margin-bottom: .05rem; }
+.ha-name { font-family: Georgia, serif; font-size: .88rem; color: var(--white); margin-bottom: .05rem; font-weight: 600; text-shadow: 0 1px 6px rgba(0,0,0,.3); }
 .ha-coord { font-size: .52rem; color: rgba(255, 255, 255, .85); letter-spacing: .06em; font-weight: 500; }
 
 /* ── EQ BAND ──────────────────────────────────────────────────────── */
