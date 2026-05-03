@@ -40,8 +40,8 @@ export default async function JourneysPage() {
           </div>
         </div>
 
-        <div className="dp-body" style={{ padding: "2rem 1.1rem" }}>
-          <div className="inner">
+        <div style={{ padding: "2rem 1.1rem" }}>
+          <div className="inner" style={{ display: "block" }}>
 
             {/* Trust bar */}
             <div style={{
