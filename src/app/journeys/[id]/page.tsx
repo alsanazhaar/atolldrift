@@ -51,6 +51,7 @@ export default async function JourneyDetailPage({ params }: Props) {
         <div className="dp-hero" style={{ position: "relative", overflow: "hidden" }}>
           <TealBannerBg src={(journey as any).bannerSrc ?? null} />
           <div className="inner" style={{ position: "relative", zIndex: 2 }}>
+            <div className="hero-text-block">
 
             <Link href="/journeys" className="dp-back">← All journeys</Link>
             <div className={`dp-hemi${journey.hemisphere === "south" ? " south" : ""}`}>
@@ -90,6 +91,8 @@ export default async function JourneyDetailPage({ params }: Props) {
                 </a>
               </div>
             )}
+            </div>{/* end hero-text-block */}
+            </div>{/* end hero-text-block */}
           </div>
         </div>
 
