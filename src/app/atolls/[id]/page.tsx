@@ -31,11 +31,6 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 
 // ── Journey card ──────────────────────────────────────────────────────
 function JourneyCard({ journey }: { journey: Journey }) {
-  const nextDep = journey.departures[0];
-  const isHot = nextDep?.status === "hot";
-  const isLow = (nextDep?.spots ?? 99) <= 3;
-  const urgent = isHot || isLow;
-
   return (
     <Link
       href={`/journeys/${journey.id}`}
@@ -54,25 +49,11 @@ function JourneyCard({ journey }: { journey: Journey }) {
         <span>{journey.duration}</span>
         <span style={{ color: "var(--off3)" }}>·</span>
         <span>{journey.groupSize}</span>
+        <span style={{ color: "var(--off3)" }}>·</span>
+        <span style={{ color: "var(--tq-d)", fontWeight: 600 }}>Flexible dates</span>
       </div>
-      {nextDep && (
-        <div className={`jdep ${urgent ? "dep-hot" : "dep-open"}`}
-          style={{ display: "flex", alignItems: "center", gap: ".3rem" }}>
-          {urgent ? (
-            <>
-              <span style={{ width: 6, height: 6, borderRadius: "50%", background: "var(--coral)", display: "inline-block", flexShrink: 0 }} />
-              <span style={{ background: "var(--coral)", color: "#fff", fontSize: ".42rem", padding: ".1rem .38rem", borderRadius: "2px", fontWeight: 700, letterSpacing: ".08em", textTransform: "uppercase" }}>
-                Only {nextDep.spots} {nextDep.spots === 1 ? "spot" : "spots"} left
-              </span>
-              {nextDep.date}
-            </>
-          ) : (
-            <>Next: {nextDep.date} · {nextDep.spotsLabel}</>
-          )}
-        </div>
-      )}
       <div className="jcard-cta">
-        <span>See available dates</span>
+        <span>Request a spot</span>
         <span className="jcard-cta-arrow">→</span>
       </div>
     </Link>
