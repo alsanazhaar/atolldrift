@@ -26,8 +26,6 @@ function TruthPoint({ text, variant }: { text: string; variant?: "gold" }) {
 }
 
 function JourneyCard({ journey }: { journey: Journey }) {
-  const nextDep = journey.departures[0];
-  const isHot = nextDep?.status === "hot";
   return (
     <Link href={`/journeys/${journey.id}`} className={`jcard${journey.goldAccent ? " gold-l" : ""}`} style={{ textDecoration: "none" }}>
       <div className="jcard-top">
@@ -37,25 +35,16 @@ function JourneyCard({ journey }: { journey: Journey }) {
           ${journey.price.toLocaleString()}
         </div>
       </div>
+      <p className="jcard-tagline">{journey.tagline}</p>
       <div className="jcard-meta">
         <span>{journey.duration}</span>
         <span style={{ color: "var(--off3)" }}>·</span>
         <span>{journey.groupSize}</span>
+        <span style={{ color: "var(--off3)" }}>·</span>
+        <span style={{ color: "var(--tq-d)", fontWeight: 600 }}>Flexible dates</span>
       </div>
-      {nextDep && (
-        <div className={`jdep ${isHot ? "dep-hot" : "dep-open"}`}>
-          {isHot ? (
-            <>
-              <span className="dep-hot-badge">Only {nextDep.spots} left</span>
-              {nextDep.date}
-            </>
-          ) : (
-            <>Next: {nextDep.date} · {nextDep.spotsLabel}</>
-          )}
-        </div>
-      )}
       <div className="jcard-cta">
-        <span>See available dates</span>
+        <span>Request a spot</span>
         <span className="jcard-cta-arrow">→</span>
       </div>
     </Link>
