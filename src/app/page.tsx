@@ -4,6 +4,7 @@ import Hero from "@/components/sections/Hero";
 import AtollSection from "@/components/sections/AtollSection";
 import GroupSection from "@/components/sections/GroupSection";
 import Manifesto from "@/components/sections/Manifesto";
+import Reviews from "@/components/sections/Reviews";
 import AIJourneyFinder from "@/components/ui/AIJourneyFinder";
 import { getAtolls, getJourneys } from "@/lib/data";
 
@@ -34,6 +35,7 @@ export default async function HomePage() {
         ))}
         <GroupSection journeys={journeys} />
         <Manifesto />
+        <Reviews />
       </main>
       <Footer />
       <AIJourneyFinder />

@@ -1172,7 +1172,7 @@ footer { background: var(--ink); padding: 1.8rem 1.1rem 1.2rem; }
   .gtabs { flex-direction: column; gap: .4rem; }
   .gtab { text-align: left; min-height: auto; padding: .55rem .85rem; font-size: .65rem; }
 
-  .manifesto { padding: 6rem 0; }
+  .manifesto { padding: 3.5rem 0; }
   .manifesto h2 { font-size: 2.2rem; max-width: 680px; margin: 0 auto .9rem; }
   .manifesto p { font-size: .88rem; max-width: 580px; margin: 0 auto .8rem; }
 
