@@ -79,7 +79,11 @@ export async function getExperienceById(id: string): Promise<Experience | null> 
   const experiences = await getExperiences();
   return experiences.find((x) => x.id === id) ?? null;
 }
-) {
+export async function saveBookingRequest(payload: {
+  type: "journey" | "experience"; itemId: string;
+  guestName: string; guestEmail: string; guestCount?: number;
+  preferredDate?: string; notes?: string;
+}) {
   const { error } = await db().from("booking_requests").insert({
     type: payload.type, item_id: payload.itemId, departure_id: null,
     guest_name: payload.guestName, guest_email: payload.guestEmail,
