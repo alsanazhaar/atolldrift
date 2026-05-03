@@ -180,3 +180,32 @@ export async function getAllStories(): Promise<Story[]> {
   if (error || !data) { console.error("[AtollDrift] getAllStories:", error?.message); return []; }
   return data.map((row: any) => mapStory(row));
 }
+
+// ── REVIEWS ───────────────────────────────────────────────────────────
+export interface Review {
+  id: string;
+  authorName: string;
+  location: string;
+  journey: string;
+  body: string;
+  rating: number;
+  sortOrder: number;
+}
+
+export async function getPublishedReviews(): Promise<Review[]> {
+  const { data, error } = await db()
+    .from("reviews")
+    .select("*")
+    .eq("is_published", true)
+    .order("sort_order");
+  if (error || !data) { console.error("[AtollDrift] getPublishedReviews:", error?.message); return []; }
+  return data.map((r: any) => ({
+    id: r.id,
+    authorName: r.author_name,
+    location: r.location,
+    journey: r.journey,
+    body: r.body,
+    rating: r.rating,
+    sortOrder: r.sort_order,
+  }));
+}

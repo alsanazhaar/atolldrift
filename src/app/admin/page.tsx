@@ -5,7 +5,7 @@ import { useRouter } from "next/navigation";
 import { createBrowserSupabaseClient } from "@/lib/auth";
 
 // ── Types ─────────────────────────────────────────────────────────────
-type Section = "journeys" | "departures" | "experiences" | "atolls" | "hero" | "banners" | "stories" | "bookings" | "hosts";
+type Section = "journeys" | "departures" | "experiences" | "atolls" | "hero" | "banners" | "stories" | "reviews" | "bookings" | "hosts";
 
 interface Toast { msg: string; type: "ok" | "err" }
 
@@ -688,6 +688,116 @@ function AtollsSection({ toast }: { toast: (t: Toast) => void }) {
           </div>
         );
       })}
+    </div>
+  );
+}
+
+// ── REVIEWS SECTION ──────────────────────────────────────────────────
+function ReviewsSection({ toast }: { toast: (t: Toast) => void }) {
+  const [rows, setRows] = useState<any[]>([]);
+  const [loading, setLoading] = useState(true);
+  const [editing, setEditing] = useState<any | null>(null);
+  const supabase = createBrowserSupabaseClient();
+
+  const emptyForm = () => ({
+    author_name: "", location: "", journey: "", body: "", rating: 5, is_published: false, sort_order: 0,
+  });
+  const [form, setForm] = useState(emptyForm());
+  const set = (k: string, v: any) => setForm(f => ({ ...f, [k]: v }));
+
+  const load = useCallback(async () => {
+    setLoading(true);
+    const { data } = await supabase.from("reviews").select("*").order("sort_order");
+    setRows(data ?? []);
+    setLoading(false);
+  }, []);
+
+  useEffect(() => { load(); }, [load]);
+
+  const save = async () => {
+    if (!form.author_name || !form.body) return toast({ msg: "Name and review are required", type: "err" });
+    const { error } = editing
+      ? await supabase.from("reviews").update(form).eq("id", editing.id)
+      : await supabase.from("reviews").insert(form);
+    if (error) return toast({ msg: error.message, type: "err" });
+    toast({ msg: editing ? "Review updated" : "Review added", type: "ok" });
+    setEditing(null); setForm(emptyForm()); load();
+  };
+
+  const togglePublish = async (row: any) => {
+    await supabase.from("reviews").update({ is_published: !row.is_published }).eq("id", row.id);
+    toast({ msg: !row.is_published ? "Published" : "Unpublished", type: "ok" }); load();
+  };
+
+  const del = async (id: string) => {
+    if (!confirm("Delete this review?")) return;
+    await supabase.from("reviews").delete().eq("id", id);
+    toast({ msg: "Deleted", type: "ok" }); load();
+  };
+
+  if (loading) return <div style={{ color: "var(--muted)", fontSize: ".8rem" }}>Loading...</div>;
+
+  return (
+    <div>
+      <div style={{ fontSize: ".58rem", fontWeight: 700, letterSpacing: ".14em", textTransform: "uppercase", color: "var(--muted2)", marginBottom: "1.2rem" }}>
+        {rows.length} reviews · {rows.filter(r => r.is_published).length} published
+      </div>
+
+      {/* Form */}
+      <div style={{ background: "var(--off)", border: "1.5px solid var(--tq-xl)", padding: "1.2rem", marginBottom: "1.4rem" }}>
+        <div style={{ fontFamily: "'Cormorant Garamond',serif", fontSize: "1rem", color: "var(--ink)", fontWeight: 600, marginBottom: "1rem" }}>
+          {editing ? "Edit Review" : "Add Review"}
+        </div>
+        <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "0 1rem" }}>
+          <Field label="Author name *"><input style={inp} value={form.author_name} onChange={e => set("author_name", e.target.value)} placeholder="Sarah M." /></Field>
+          <Field label="Location"><input style={inp} value={form.location} onChange={e => set("location", e.target.value)} placeholder="London" /></Field>
+          <Field label="Journey"><input style={inp} value={form.journey} onChange={e => set("journey", e.target.value)} placeholder="Huvadhu Deep — 10 Days" /></Field>
+          <Field label="Rating">
+            <select style={inp} value={form.rating} onChange={e => set("rating", parseInt(e.target.value))}>
+              {[5,4,3,2,1].map(n => <option key={n} value={n}>{n} stars</option>)}
+            </select>
+          </Field>
+        </div>
+        <Field label="Review *">
+          <textarea style={{ ...inp, minHeight: 100, resize: "vertical" }} value={form.body} onChange={e => set("body", e.target.value)} placeholder="Write the review..." />
+        </Field>
+        <div style={{ display: "flex", alignItems: "center", gap: ".5rem", marginBottom: ".85rem" }}>
+          <input type="checkbox" id="rev-pub" checked={form.is_published} onChange={e => set("is_published", e.target.checked)} />
+          <label htmlFor="rev-pub" style={{ ...lbl, margin: 0 }}>Publish immediately</label>
+        </div>
+        <div style={{ display: "flex", gap: ".6rem" }}>
+          <button style={btn()} onClick={save}>{editing ? "Save" : "Add review"}</button>
+          {editing && <button style={ghostBtn} onClick={() => { setEditing(null); setForm(emptyForm()); }}>Cancel</button>}
+        </div>
+      </div>
+
+      {/* List */}
+      {rows.map(row => (
+        <div key={row.id} style={card}>
+          <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-start", gap: ".75rem" }}>
+            <div style={{ flex: 1, minWidth: 0 }}>
+              <div style={{ display: "flex", alignItems: "center", gap: ".5rem", marginBottom: ".2rem" }}>
+                <span style={{ fontSize: ".85rem", fontWeight: 600, color: "var(--ink)" }}>{row.author_name}</span>
+                <span style={badge(row.is_published ? "#2A8050" : "var(--muted2)", row.is_published ? "#E8F5EE" : "var(--off2)") as any}>
+                  {row.is_published ? "Published" : "Draft"}
+                </span>
+                <span style={{ color: "var(--eq)", fontSize: ".65rem" }}>{"★".repeat(row.rating)}</span>
+              </div>
+              <div style={{ fontSize: ".6rem", color: "var(--muted2)" }}>{row.location} · {row.journey}</div>
+              <div style={{ fontSize: ".7rem", color: "var(--muted)", marginTop: ".25rem", fontStyle: "italic", lineHeight: 1.5 }}>
+                "{row.body?.slice(0, 100)}{row.body?.length > 100 ? "..." : ""}"
+              </div>
+            </div>
+            <div style={{ display: "flex", flexDirection: "column", gap: ".35rem", flexShrink: 0 }}>
+              <button style={ghostBtn} onClick={() => { setEditing(row); setForm({ author_name: row.author_name, location: row.location, journey: row.journey, body: row.body, rating: row.rating, is_published: row.is_published, sort_order: row.sort_order }); }}>Edit</button>
+              <button style={{ ...ghostBtn, color: row.is_published ? "var(--muted2)" : "#2A8050", borderColor: row.is_published ? "var(--off3)" : "#2A8050" }} onClick={() => togglePublish(row)}>
+                {row.is_published ? "Unpublish" : "Publish"}
+              </button>
+              <button style={{ ...ghostBtn, color: "var(--coral)", borderColor: "var(--coral)" }} onClick={() => del(row.id)}>Delete</button>
+            </div>
+          </div>
+        </div>
+      ))}
     </div>
   );
 }
@@ -1461,6 +1571,7 @@ export default function AdminPage() {
     { id: "hero",       label: "Hero Images" },
     { id: "banners",    label: "Page Banners" },
     { id: "stories",    label: "Stories" },
+    { id: "reviews",    label: "Reviews" },
     { id: "bookings",   label: "Bookings" },
     { id: "hosts",      label: "Host Applications" },
   ];
@@ -1526,6 +1637,7 @@ export default function AdminPage() {
           {section === "hero"        && <HeroSection        toast={showToast} />}
           {section === "banners"     && <PageBannersSection toast={showToast} />}
           {section === "stories"     && <StoriesSection     toast={showToast} />}
+          {section === "reviews"     && <ReviewsSection     toast={showToast} />}
           {section === "bookings"    && <BookingsSection    toast={showToast} />}
           {section === "hosts"       && <HostsSection       toast={showToast} />}
         </div>
