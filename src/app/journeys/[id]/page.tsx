@@ -111,28 +111,14 @@ export default async function JourneyDetailPage({ params }: Props) {
                 borderLeft: "3px solid var(--tq)",
                 padding: "1rem 1.1rem",
                 marginBottom: "1.5rem",
-                display: "flex",
-                alignItems: "flex-start",
-                gap: "1rem",
-                flexWrap: "wrap",
               }}>
-                <div>
-                  <div style={{ fontSize: ".52rem", fontWeight: 700, letterSpacing: ".14em", textTransform: "uppercase", color: "var(--tq-d)", marginBottom: ".2rem" }}>
-                    Flexible dates · Limited group availability
-                  </div>
-                  <div style={{ fontSize: ".75rem", color: "var(--muted)", lineHeight: 1.65 }}>
-                    We run small groups of 6–10 people on flexible dates throughout the season.
-                    Request your preferred dates and we will confirm availability within 24 hours.
-                  </div>
+                <div style={{ fontSize: ".52rem", fontWeight: 700, letterSpacing: ".14em", textTransform: "uppercase", color: "var(--tq-d)", marginBottom: ".2rem" }}>
+                  Flexible dates · Limited group availability
                 </div>
-                <a href="#booking-form" style={{
-                  flexShrink: 0, display: "inline-flex", alignItems: "center",
-                  background: "var(--tq)", color: "var(--white)", padding: ".5rem .9rem",
-                  fontSize: ".65rem", fontWeight: 700, letterSpacing: ".07em", textTransform: "uppercase",
-                  textDecoration: "none", whiteSpace: "nowrap", minHeight: 40,
-                }}>
-                  Check availability
-                </a>
+                <div style={{ fontSize: ".75rem", color: "var(--muted)", lineHeight: 1.65 }}>
+                  We run small groups of 6–10 people on flexible dates throughout the season.
+                  Request your preferred dates and we will confirm availability within 24 hours.
+                </div>
               </div>
 
               {/* Itinerary */}
@@ -142,12 +128,9 @@ export default async function JourneyDetailPage({ params }: Props) {
                   A guide to what this journey includes — exact scheduling adapts to group needs and conditions.
                 </div>
                 {journey.days.map((day, i) => (
-                  <div key={i} className="day-item" style={{ paddingBottom: ".9rem", marginBottom: ".9rem", borderBottom: i < journey.days.length - 1 ? "1px solid var(--off2)" : "none" }}>
-                    <div className="dlbl">{day.label}</div>
-                    <div>
-                      <div className="dtitle">{day.title}</div>
-                      <div className="ddesc">{day.desc}</div>
-                    </div>
+                  <div key={i} style={{ paddingBottom: ".9rem", marginBottom: ".9rem", borderBottom: i < journey.days.length - 1 ? "1px solid var(--off2)" : "none" }}>
+                    <div className="dtitle">{day.title}</div>
+                    <div className="ddesc">{day.desc}</div>
                   </div>
                 ))}
               </div>
