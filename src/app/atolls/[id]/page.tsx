@@ -148,6 +148,7 @@ export default async function AtollPage({ params }: Props) {
           )}
 
           <div className="inner" style={{ position: "relative", zIndex: 2 }}>
+            <div style={{ maxWidth: 560 }}>
             <Link href="/" className="dp-back">← Home</Link>
 
             <div style={{ display: "flex", alignItems: "center", gap: ".5rem", margin: ".5rem 0" }}>
@@ -179,6 +180,7 @@ export default async function AtollPage({ params }: Props) {
                 All departures
               </Link>
             </div>
+            </div>{/* end max-width wrapper */}
           </div>
         </div>
 

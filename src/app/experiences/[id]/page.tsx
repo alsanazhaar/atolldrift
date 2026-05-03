@@ -39,6 +39,7 @@ export default async function ExperienceDetailPage({ params }: Props) {
         <div style={{ background: "var(--tq)", padding: "2rem 1.1rem 1.8rem", position: "relative", overflow: "hidden" }}>
           <TealBannerBg src={(xp as any).bannerSrc ?? null} />
           <div className="inner" style={{ position: "relative", zIndex: 2 }}>
+            <div style={{ maxWidth: 560 }}>
             
             <Link href="/experiences" className="dp-back">← Back to Experiences</Link>
             <div className={`exp-cat ${xp.catClass}`} style={{ display: "inline-block", marginBottom: ".5rem" }}>{xp.catLabel}</div>
@@ -58,6 +59,7 @@ export default async function ExperienceDetailPage({ params }: Props) {
               <span>{xp.duration}</span>
               <span>Up to {xp.groupSize} guests</span>
               <span>★ {xp.rating} ({xp.ratingCount} reviews)</span>
+            </div>
             </div>
           </div>
         </div>
