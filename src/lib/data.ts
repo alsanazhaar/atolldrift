@@ -61,7 +61,7 @@ export async function getJourneyById(id: string): Promise<Journey | null> {
 
 export async function getExperiences(): Promise<Experience[]> {
   const { data, error } = await db().from("experiences")
-    .select("*, banner_src, experience_included(item,sort_order), experience_rules(rule,sort_order)")
+    .select("*")
     .order("created_at");
   if (error || !data) { console.error("[AtollDrift] getExperiences:", error?.message); return []; }
   return data.map((row: any) => ({
@@ -72,8 +72,7 @@ export async function getExperiences(): Promise<Experience[]> {
     price: row.price, priceLabel: row.price_label, rating: Number(row.rating),
     ratingCount: row.rating_count, description: row.description,
     bannerSrc: row.banner_src ?? null,
-    included: (row.experience_included??[]).sort((a:any,b:any)=>a.sort_order-b.sort_order).map((i:any)=>i.item),
-    rules: (row.experience_rules??[]).sort((a:any,b:any)=>a.sort_order-b.sort_order).map((r:any)=>r.rule),
+    included: [], rules: [],
   }));
 }
 

@@ -34,7 +34,10 @@ export default function ExperiencesPage() {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    getExperiences().then((data) => { setExperiences(data); setLoading(false); });
+    getExperiences()
+      .then((data) => { setExperiences(data); })
+      .catch(() => { setExperiences([]); })
+      .finally(() => setLoading(false));
   }, []);
 
   const filtered = activeFilter === "all"
