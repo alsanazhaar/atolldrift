@@ -279,20 +279,6 @@ function DeparturesSection({ toast }: { toast: (t: Toast) => void }) {
     return n <= 4 ? `${n} spots remaining` : `${n} spots open`;
   };
 
-  const uploadBanner = async (file: File) => {
-    if (!form.id) return toast({ msg: "Set a Journey ID before uploading an image", type: "err" });
-    setUploadingBanner(true);
-    try {
-      const ext = file.name.split(".").pop();
-      const path = `banners/journeys/${form.id}-${Date.now()}.${ext}`;
-      const { error: upErr } = await supabase.storage.from("atoll-photos").upload(path, file, { upsert: true, contentType: file.type });
-      if (upErr) { toast({ msg: upErr.message, type: "err" }); return; }
-      const { data: { publicUrl } } = supabase.storage.from("atoll-photos").getPublicUrl(path);
-      set("banner_src", publicUrl);
-      toast({ msg: "Image uploaded", type: "ok" });
-    } finally { setUploadingBanner(false); }
-  };
-
   const save = async () => {
     const payload = {
       journey_id: form.journey_id, date: form.date,
@@ -452,20 +438,6 @@ function ExperiencesSection({ toast }: { toast: (t: Toast) => void }) {
     setAdding(true);
   };
 
-  const uploadBanner = async (file: File) => {
-    if (!form.id) return toast({ msg: "Set a Journey ID before uploading an image", type: "err" });
-    setUploadingBanner(true);
-    try {
-      const ext = file.name.split(".").pop();
-      const path = `banners/journeys/${form.id}-${Date.now()}.${ext}`;
-      const { error: upErr } = await supabase.storage.from("atoll-photos").upload(path, file, { upsert: true, contentType: file.type });
-      if (upErr) { toast({ msg: upErr.message, type: "err" }); return; }
-      const { data: { publicUrl } } = supabase.storage.from("atoll-photos").getPublicUrl(path);
-      set("banner_src", publicUrl);
-      toast({ msg: "Image uploaded", type: "ok" });
-    } finally { setUploadingBanner(false); }
-  };
-
   const save = async () => {
     const payload = {
       ...form, price: parseInt(form.price) || 0,
@@ -611,20 +583,6 @@ function AtollsSection({ toast }: { toast: (t: Toast) => void }) {
       why_this_atoll: row.why_this_atoll ?? "",
       is_active: row.is_active ?? true,
     });
-  };
-
-  const uploadBanner = async (file: File) => {
-    if (!form.id) return toast({ msg: "Set a Journey ID before uploading an image", type: "err" });
-    setUploadingBanner(true);
-    try {
-      const ext = file.name.split(".").pop();
-      const path = `banners/journeys/${form.id}-${Date.now()}.${ext}`;
-      const { error: upErr } = await supabase.storage.from("atoll-photos").upload(path, file, { upsert: true, contentType: file.type });
-      if (upErr) { toast({ msg: upErr.message, type: "err" }); return; }
-      const { data: { publicUrl } } = supabase.storage.from("atoll-photos").getPublicUrl(path);
-      set("banner_src", publicUrl);
-      toast({ msg: "Image uploaded", type: "ok" });
-    } finally { setUploadingBanner(false); }
   };
 
   const save = async () => {
@@ -806,20 +764,6 @@ function ReviewsSection({ toast }: { toast: (t: Toast) => void }) {
   }, []);
 
   useEffect(() => { load(); }, [load]);
-
-  const uploadBanner = async (file: File) => {
-    if (!form.id) return toast({ msg: "Set a Journey ID before uploading an image", type: "err" });
-    setUploadingBanner(true);
-    try {
-      const ext = file.name.split(".").pop();
-      const path = `banners/journeys/${form.id}-${Date.now()}.${ext}`;
-      const { error: upErr } = await supabase.storage.from("atoll-photos").upload(path, file, { upsert: true, contentType: file.type });
-      if (upErr) { toast({ msg: upErr.message, type: "err" }); return; }
-      const { data: { publicUrl } } = supabase.storage.from("atoll-photos").getPublicUrl(path);
-      set("banner_src", publicUrl);
-      toast({ msg: "Image uploaded", type: "ok" });
-    } finally { setUploadingBanner(false); }
-  };
 
   const save = async () => {
     if (!form.author_name || !form.body) return toast({ msg: "Name and review are required", type: "err" });
@@ -1029,20 +973,6 @@ function StoriesSection({ toast }: { toast: (t: Toast) => void }) {
     });
     loadImages(row.id);
     setAdding(true);
-  };
-
-  const uploadBanner = async (file: File) => {
-    if (!form.id) return toast({ msg: "Set a Journey ID before uploading an image", type: "err" });
-    setUploadingBanner(true);
-    try {
-      const ext = file.name.split(".").pop();
-      const path = `banners/journeys/${form.id}-${Date.now()}.${ext}`;
-      const { error: upErr } = await supabase.storage.from("atoll-photos").upload(path, file, { upsert: true, contentType: file.type });
-      if (upErr) { toast({ msg: upErr.message, type: "err" }); return; }
-      const { data: { publicUrl } } = supabase.storage.from("atoll-photos").getPublicUrl(path);
-      set("banner_src", publicUrl);
-      toast({ msg: "Image uploaded", type: "ok" });
-    } finally { setUploadingBanner(false); }
   };
 
   const save = async () => {
