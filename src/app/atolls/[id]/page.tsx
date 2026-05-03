@@ -6,6 +6,8 @@ import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
 import AIJourneyFinder from "@/components/ui/AIJourneyFinder";
 import { getAtolls, getJourneys, getExperiences } from "@/lib/data";
+import AtollHeroSlideshow from "@/components/ui/AtollHeroSlideshow";
+import AtollHeroSlideshow from "@/components/ui/AtollHeroSlideshow";
 import type { Journey, Experience } from "@/lib/types";
 
 export const revalidate = 0;
@@ -122,8 +124,6 @@ export default async function AtollPage({ params }: Props) {
     x.atoll.toLowerCase() === atoll.name.toLowerCase()
   );
 
-  const hasPhoto = !!atoll.photo?.main?.src;
-
   return (
     <>
       <Navbar />
@@ -131,21 +131,14 @@ export default async function AtollPage({ params }: Props) {
 
         {/* ── Hero ── */}
         <div style={{ background: "#0d1f24", padding: "2.5rem 1.1rem 2rem", position: "relative", overflow: "hidden", minHeight: "58vh", display: "flex", flexDirection: "column", justifyContent: "flex-end" }}>
-          {/* Background photo if available */}
-          {hasPhoto && (
-            <>
-              <div style={{ position: "absolute", inset: 0, zIndex: 0 }}>
-                <Image
-                  src={atoll.photo.main.src}
-                  alt={atoll.photo.main.alt}
-                  fill
-                  style={{ objectFit: "cover" }}
-                  priority
-                />
-              </div>
-              <div style={{ position: "absolute", inset: 0, background: "linear-gradient(to bottom, rgba(0,0,0,.15) 0%, transparent 25%, rgba(0,0,0,.5) 65%, rgba(0,0,0,.78) 100%)", zIndex: 1 }} />
-            </>
-          )}
+          {/* Slideshow — uses all available atoll photos */}
+          <AtollHeroSlideshow slides={[
+            ...(atoll.photo?.main?.src ? [{ src: atoll.photo.main.src, alt: atoll.photo.main.alt }] : []),
+            ...(atoll.photo?.strip1?.src ? [{ src: atoll.photo.strip1.src, alt: atoll.photo.strip1.alt }] : []),
+            ...(atoll.photo?.strip2?.src ? [{ src: atoll.photo.strip2.src, alt: atoll.photo.strip2.alt }] : []),
+          ]} />
+          {/* Gradient overlay */}
+          <div style={{ position: "absolute", inset: 0, background: "linear-gradient(to bottom, rgba(0,0,0,.12) 0%, transparent 30%, rgba(0,0,0,.45) 65%, rgba(0,0,0,.78) 100%)", zIndex: 1 }} />
 
           <div className="inner" style={{ position: "relative", zIndex: 2, maxWidth: "100%", margin: 0, padding: "0 1.1rem" }}>
             <div style={{ maxWidth: 560 }}>
