@@ -37,6 +37,12 @@ export interface Atoll {
   whyThisAtoll?: string | null;
 }
 
+export interface DayItem {
+  label: string;
+  title: string;
+  desc: string;
+}
+
 export interface Journey {
   id: string;
   atollId: string;
