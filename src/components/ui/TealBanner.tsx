@@ -1,0 +1,61 @@
+"use client";
+
+import { useEffect, useState } from "react";
+import { createClient } from "@supabase/supabase-js";
+
+// ── Fetch a page banner by page key ──────────────────────────────────
+export function usePageBanner(page: string) {
+  const [src, setSrc] = useState<string | null>(null);
+
+  useEffect(() => {
+    const db = createClient(
+      process.env.NEXT_PUBLIC_SUPABASE_URL!,
+      process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!
+    );
+    db.from("page_banners")
+      .select("src")
+      .eq("page", page)
+      .maybeSingle()
+      .then(({ data }) => { if (data?.src) setSrc(data.src); });
+  }, [page]);
+
+  return src;
+}
+
+// ── TealBanner — drop-in background for any teal section ─────────────
+// Usage: wrap your existing section content with this, passing the image src.
+// If no src, section renders as plain teal (existing behaviour).
+interface TealBannerProps {
+  src: string | null;
+  overlay?: number; // opacity 0–1, default 0.72
+}
+
+export function TealBannerBg({ src, overlay = 0.72 }: TealBannerProps) {
+  if (!src) return null;
+  return (
+    <>
+      {/* Photo layer */}
+      <div
+        aria-hidden="true"
+        style={{
+          position: "absolute",
+          inset: 0,
+          backgroundImage: `url(${src})`,
+          backgroundSize: "cover",
+          backgroundPosition: "center",
+          zIndex: 0,
+        }}
+      />
+      {/* Teal overlay — keeps brand colour and text readable */}
+      <div
+        aria-hidden="true"
+        style={{
+          position: "absolute",
+          inset: 0,
+          background: `rgba(10, 123, 140, ${overlay})`,
+          zIndex: 1,
+        }}
+      />
+    </>
+  );
+}
