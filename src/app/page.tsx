@@ -5,14 +5,13 @@ import AtollSection from "@/components/sections/AtollSection";
 import GroupSection from "@/components/sections/GroupSection";
 import Manifesto from "@/components/sections/Manifesto";
 import AIJourneyFinder from "@/components/ui/AIJourneyFinder";
-import { getAtolls, getUpcomingDepartures, getJourneys } from "@/lib/data";
+import { getAtolls, getJourneys } from "@/lib/data";
 
 export const revalidate = 0;
 
 export default async function HomePage() {
-  const [atolls, departures, journeys] = await Promise.all([
+  const [atolls, journeys] = await Promise.all([
     getAtolls(),
-    getUpcomingDepartures(),
     getJourneys(),
   ]);
 
@@ -33,7 +32,7 @@ export default async function HomePage() {
             showDividerAfter={i === 0}
           />
         ))}
-        <GroupSection departures={departures} />
+        <GroupSection journeys={journeys} />
         <Manifesto />
       </main>
       <Footer />
