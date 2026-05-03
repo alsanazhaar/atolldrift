@@ -1,7 +1,7 @@
 import { createClient } from "@supabase/supabase-js";
 import type { Atoll, Journey, Experience, Story, StoryImage } from "@/lib/types";
 // Types re-exported from types.ts for convenience
-export type { Atoll, Journey, Experience, DayItem, ExperienceCategory } from "@/lib/types";
+export type { Atoll, Journey, Experience, ExperienceCategory } from "@/lib/types";
 
 function db() {
   return createClient(
