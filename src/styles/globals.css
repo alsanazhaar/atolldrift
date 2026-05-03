@@ -1665,10 +1665,13 @@ footer { background: var(--ink); padding: 1.8rem 1.1rem 1.2rem; }
   z-index: 1;
 }
 
-/* Text sits above the gradient */
+/* Text sits above the gradient — override centred inner to use full page width */
 .dp-hero .inner {
   position: relative;
   z-index: 2;
+  max-width: 100%;
+  margin: 0;
+  padding: 0 1.1rem;
 }
 
 /* Strong text shadows for all hero text */

@@ -147,7 +147,7 @@ export default async function AtollPage({ params }: Props) {
             </>
           )}
 
-          <div className="inner" style={{ position: "relative", zIndex: 2 }}>
+          <div className="inner" style={{ position: "relative", zIndex: 2, maxWidth: "100%", margin: 0, padding: "0 1.1rem" }}>
             <div style={{ maxWidth: 560 }}>
             <Link href="/" className="dp-back">← Home</Link>
 
