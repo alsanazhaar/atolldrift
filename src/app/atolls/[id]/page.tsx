@@ -7,7 +7,6 @@ import Footer from "@/components/layout/Footer";
 import AIJourneyFinder from "@/components/ui/AIJourneyFinder";
 import { getAtolls, getJourneys, getExperiences } from "@/lib/data";
 import AtollHeroSlideshow from "@/components/ui/AtollHeroSlideshow";
-import AtollHeroSlideshow from "@/components/ui/AtollHeroSlideshow";
 import type { Journey, Experience } from "@/lib/types";
 
 export const revalidate = 0;
