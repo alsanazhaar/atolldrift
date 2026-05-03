@@ -147,7 +147,7 @@ export default async function AtollPage({ params }: Props) {
             </>
           )}
 
-          <div className="inner" style={{ position: "relative", zIndex: 2 }}>
+          <div className="inner" style={{ position: "relative", zIndex: 2, display: "flex", flexDirection: "column", alignItems: "flex-start" }}>
             <div className="hero-text-block">
             <Link href="/" className="dp-back">← Home</Link>
 

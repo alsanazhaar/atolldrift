@@ -1682,3 +1682,12 @@ footer { background: var(--ink); padding: 1.8rem 1.1rem 1.2rem; }
     width: 100%;
   }
 }
+
+/* Force hero inner to left-align its children */
+.dp-hero > .inner,
+.dp-hero .inner {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  width: 100%;
+}
