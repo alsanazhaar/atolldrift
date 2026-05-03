@@ -1275,6 +1275,12 @@ function PageBannersSection({ toast }: { toast: (t: Toast) => void }) {
       <UploadBtn page="journeys" src={banners["journeys"]} label="Journeys page" />
       <UploadBtn page="experiences" src={banners["experiences"]} label="Experiences page" />
 
+      {/* Manifesto */}
+      <div style={{ fontSize: ".56rem", fontWeight: 700, letterSpacing: ".14em", textTransform: "uppercase", color: "var(--tq-d)", margin: "1.4rem 0 .75rem" }}>
+        Homepage Manifesto Section
+      </div>
+      <UploadBtn page="manifesto" src={banners["manifesto"]} label="Manifesto background" />
+
       {/* Per-journey */}
       <div style={{ fontSize: ".56rem", fontWeight: 700, letterSpacing: ".14em", textTransform: "uppercase", color: "var(--tq-d)", margin: "1.4rem 0 .75rem" }}>
         Individual Journeys
