@@ -919,7 +919,7 @@ footer { background: var(--ink); padding: 1.8rem 1.1rem 1.2rem; }
 .reveal-right.visible { opacity: 1; transform: translateX(0); }
 
 /* ── DETAIL PAGES ─────────────────────────────────────────────────── */
-.dp-hero { background: #0d1f24; padding: 2rem 1.1rem 1.8rem; }
+.dp-hero { background: #0d1f24; padding: 2rem 1.1rem 1.8rem; min-height: 60vh; display: flex; flex-direction: column; justify-content: flex-end; }
 .dp-back {
   font-size: .65rem;
   letter-spacing: .09em;
@@ -1175,7 +1175,7 @@ footer { background: var(--ink); padding: 1.8rem 1.1rem 1.2rem; }
   footer { padding: 4rem 0 2rem; }
   .f-cols { grid-template-columns: 2fr 1fr 1fr 1fr; gap: 2rem; }
 
-  .dp-hero { padding: 4rem 0 3rem; }
+  .dp-hero { padding: 4rem 0 3rem; min-height: 70vh; }
   .dp-body { padding: 0; }
   .dp-body > .inner { display: grid; grid-template-columns: 1fr 340px; gap: 2.5rem; align-items: start; padding-top: 2.5rem; padding-bottom: 3rem; }
   .dp-sidebar { position: sticky; top: 80px; }
