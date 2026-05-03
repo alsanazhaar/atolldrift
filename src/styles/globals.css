@@ -137,6 +137,7 @@ nav {
 .nav-coords { display: none; gap: .7rem; align-items: center; }
 .nav-coord {
   font-size: .58rem;
+  font-weight: 700;
   letter-spacing: .1em;
   color: var(--muted2);
   cursor: pointer;
