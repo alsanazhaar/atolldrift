@@ -5,7 +5,7 @@ import { useRouter } from "next/navigation";
 import { createBrowserSupabaseClient } from "@/lib/auth";
 
 // ── Types ─────────────────────────────────────────────────────────────
-type Section = "journeys" | "departures" | "experiences" | "atolls" | "hero" | "banners" | "stories" | "reviews" | "bookings" | "hosts";
+type Section = "journeys" | "experiences" | "atolls" | "hero" | "banners" | "stories" | "reviews" | "bookings" | "hosts";
 
 interface Toast { msg: string; type: "ok" | "err" }
 
@@ -243,151 +243,6 @@ function JourneysSection({ toast }: { toast: (t: Toast) => void }) {
           </div>
         </div>
       ))}
-    </div>
-  );
-}
-
-// ── DEPARTURES SECTION ────────────────────────────────────────────────
-function DeparturesSection({ toast }: { toast: (t: Toast) => void }) {
-  const [rows, setRows] = useState<any[]>([]);
-  const [journeys, setJourneys] = useState<any[]>([]);
-  const [loading, setLoading] = useState(true);
-  const [adding, setAdding] = useState(false);
-  const [form, setForm] = useState({
-    journey_id: "", date: "", spots: "", spots_label: "", kind: "Group", status: "open", price: "",
-  });
-  const supabase = createBrowserSupabaseClient();
-
-  const load = useCallback(async () => {
-    setLoading(true);
-    const [{ data: deps }, { data: jnys }] = await Promise.all([
-      supabase.from("departures").select("*, journeys(title)").order("id"),
-      supabase.from("journeys").select("id, title").order("title"),
-    ]);
-    setRows(deps ?? []);
-    setJourneys(jnys ?? []);
-    setLoading(false);
-  }, []);
-
-  useEffect(() => { load(); }, [load]);
-
-  const set = (k: string, v: any) => setForm(f => ({ ...f, [k]: v }));
-
-  const autoLabel = (spots: string) => {
-    const n = parseInt(spots);
-    if (!n) return "";
-    return n <= 4 ? `${n} spots remaining` : `${n} spots open`;
-  };
-
-  const save = async () => {
-    const payload = {
-      journey_id: form.journey_id, date: form.date,
-      spots: parseInt(form.spots) || 0,
-      spots_label: form.spots_label || autoLabel(form.spots),
-      kind: form.kind, status: form.status,
-      price: parseInt(form.price) || 0,
-    };
-    if (!payload.journey_id || !payload.date) return toast({ msg: "Journey and date required", type: "err" });
-    const { error } = await supabase.from("departures").insert(payload);
-    if (error) return toast({ msg: error.message, type: "err" });
-    toast({ msg: "Departure added", type: "ok" });
-    setAdding(false);
-    setForm({ journey_id: "", date: "", spots: "", spots_label: "", kind: "Group", status: "open", price: "" });
-    load();
-  };
-
-  const del = async (id: number) => {
-    if (!confirm("Delete this departure?")) return;
-    await supabase.from("departures").delete().eq("id", id);
-    toast({ msg: "Departure deleted", type: "ok" }); load();
-  };
-
-  const statusColor: Record<string, [string, string]> = {
-    hot: ["var(--coral)", "#FDE8E0"],
-    open: ["#2A8050", "#E8F5EE"],
-    soldout: ["var(--muted2)", "var(--off2)"],
-  };
-
-  if (loading) return <div style={{ color: "var(--muted)", fontSize: ".8rem" }}>Loading…</div>;
-
-  return (
-    <div>
-      <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: "1.2rem" }}>
-        <div style={{ fontSize: ".58rem", fontWeight: 700, letterSpacing: ".14em", textTransform: "uppercase", color: "var(--muted2)" }}>
-          {rows.length} departures
-        </div>
-        <button style={btn()} onClick={() => setAdding(true)}>+ Add Departure</button>
-      </div>
-
-      {adding && (
-        <div style={{ background: "var(--off)", border: "1.5px solid var(--tq-xl)", padding: "1.4rem", marginBottom: "1.2rem" }}>
-          <div style={{ fontFamily: "'Cormorant Garamond',serif", fontSize: "1.1rem", color: "var(--ink)", marginBottom: "1rem", fontWeight: 600 }}>
-            New Departure
-          </div>
-          <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "0 1rem" }}>
-            <Field label="Journey">
-              <select style={inp} value={form.journey_id} onChange={e => set("journey_id", e.target.value)}>
-                <option value="">Select journey…</option>
-                {journeys.map(j => <option key={j.id} value={j.id}>{j.title}</option>)}
-              </select>
-            </Field>
-            <Field label="Date (e.g. 14 Feb 2025)">
-              <input style={inp} value={form.date} onChange={e => set("date", e.target.value)} placeholder="14 Feb 2025" />
-            </Field>
-            <Field label="Spots available">
-              <input style={inp} type="number" value={form.spots}
-                onChange={e => { set("spots", e.target.value); set("spots_label", autoLabel(e.target.value)); }} />
-            </Field>
-            <Field label="Spots label (auto-filled)">
-              <input style={inp} value={form.spots_label} onChange={e => set("spots_label", e.target.value)} placeholder="4 spots remaining" />
-            </Field>
-            <Field label="Kind">
-              <select style={inp} value={form.kind} onChange={e => set("kind", e.target.value)}>
-                <option>Group</option>
-                <option>Private available</option>
-                <option>Private only</option>
-              </select>
-            </Field>
-            <Field label="Status">
-              <select style={inp} value={form.status} onChange={e => set("status", e.target.value)}>
-                <option value="open">Open</option>
-                <option value="hot">Hot (few spots)</option>
-                <option value="soldout">Sold out</option>
-              </select>
-            </Field>
-            <Field label="Price (USD)">
-              <input style={inp} type="number" value={form.price} onChange={e => set("price", e.target.value)} />
-            </Field>
-          </div>
-          <div style={{ display: "flex", gap: ".6rem" }}>
-            <button style={btn()} onClick={save}>Add Departure</button>
-            <button style={ghostBtn} onClick={() => setAdding(false)}>Cancel</button>
-          </div>
-        </div>
-      )}
-
-      {rows.map(row => {
-        const [color, bg] = statusColor[row.status] ?? ["var(--muted2)", "var(--off2)"];
-        return (
-          <div key={row.id} style={card}>
-            <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-start", gap: ".5rem" }}>
-              <div>
-                <div style={{ fontSize: ".88rem", color: "var(--ink)", fontWeight: 600, marginBottom: ".1rem" }}>
-                  {row.journeys?.title ?? row.journey_id}
-                </div>
-                <div style={{ fontSize: ".62rem", color: "var(--muted2)" }}>
-                  {row.date} · {row.spots_label} · ${row.price?.toLocaleString()}
-                </div>
-                <div style={{ marginTop: ".3rem" }}>
-                  <span style={badge(color, bg)}>{row.status}</span>
-                  <span style={{ ...badge("var(--muted2)", "var(--off2)"), marginLeft: ".35rem" }}>{row.kind}</span>
-                </div>
-              </div>
-              <button style={{ ...ghostBtn, color: "var(--coral)", borderColor: "var(--coral)" }} onClick={() => del(row.id)}>Delete</button>
-            </div>
-          </div>
-        );
-      })}
     </div>
   );
 }
@@ -1238,22 +1093,14 @@ function PageBannersSection({ toast }: { toast: (t: Toast) => void }) {
   const supabase = createBrowserSupabaseClient();
   const [uploading, setUploading] = useState<string | null>(null);
   const [banners, setBanners] = useState<Record<string, string>>({});
-  const [journeys, setJourneys] = useState<any[]>([]);
-  const [experiences, setExperiences] = useState<any[]>([]);
   const [loading, setLoading] = useState(true);
 
   const load = useCallback(async () => {
     setLoading(true);
-    const [{ data: pb }, { data: jnys }, { data: xps }] = await Promise.all([
-      supabase.from("page_banners").select("page, src"),
-      supabase.from("journeys").select("id, title, banner_src").order("atoll_id"),
-      supabase.from("experiences").select("id, title, banner_src").order("atoll"),
-    ]);
+    const { data: pb } = await supabase.from("page_banners").select("page, src");
     const map: Record<string, string> = {};
     (pb ?? []).forEach((r: any) => { map[r.page] = r.src; });
     setBanners(map);
-    setJourneys(jnys ?? []);
-    setExperiences(xps ?? []);
     setLoading(false);
   }, []);
 
@@ -1269,21 +1116,6 @@ function PageBannersSection({ toast }: { toast: (t: Toast) => void }) {
       const { data: { publicUrl } } = supabase.storage.from("atoll-photos").getPublicUrl(path);
       await supabase.from("page_banners").upsert({ page, src: publicUrl, alt: page }, { onConflict: "page" });
       toast({ msg: `${page} banner updated`, type: "ok" });
-      load();
-    } finally { setUploading(null); }
-  };
-
-  const uploadItemBanner = async (table: "journeys" | "experiences", id: string, file: File) => {
-    const key = `${table}-${id}`;
-    setUploading(key);
-    try {
-      const ext = file.name.split(".").pop();
-      const path = `banners/${table}/${id}-${Date.now()}.${ext}`;
-      const { error: upErr } = await supabase.storage.from("atoll-photos").upload(path, file, { upsert: true, contentType: file.type });
-      if (upErr) { toast({ msg: upErr.message, type: "err" }); return; }
-      const { data: { publicUrl } } = supabase.storage.from("atoll-photos").getPublicUrl(path);
-      await supabase.from(table).update({ banner_src: publicUrl }).eq("id", id);
-      toast({ msg: "Banner updated", type: "ok" });
       load();
     } finally { setUploading(null); }
   };
@@ -1315,7 +1147,7 @@ function PageBannersSection({ toast }: { toast: (t: Toast) => void }) {
   return (
     <div>
       <div style={{ fontSize: ".62rem", color: "var(--muted)", marginBottom: "1.4rem", lineHeight: 1.7 }}>
-        Upload a background photo for each page&apos;s teal header. Photos show behind the text with a teal overlay.
+        Upload background photos for page heroes and the homepage manifesto section.
         Recommended: landscape photos, 1400px+ wide.
       </div>
 
@@ -1332,55 +1164,6 @@ function PageBannersSection({ toast }: { toast: (t: Toast) => void }) {
       </div>
       <UploadBtn page="manifesto" src={banners["manifesto"]} label="Manifesto background" />
 
-      {/* Per-journey */}
-      <div style={{ fontSize: ".56rem", fontWeight: 700, letterSpacing: ".14em", textTransform: "uppercase", color: "var(--tq-d)", margin: "1.4rem 0 .75rem" }}>
-        Individual Journeys
-      </div>
-      {journeys.map(j => (
-        <div key={j.id} style={card}>
-          <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", gap: "1rem" }}>
-            <div style={{ flex: 1, minWidth: 0 }}>
-              <div style={{ fontSize: ".88rem", color: "var(--ink)", fontWeight: 600, whiteSpace: "nowrap", overflow: "hidden", textOverflow: "ellipsis" }}>{j.title}</div>
-              {j.banner_src && (
-                <div style={{ marginTop: ".4rem", width: 120, aspectRatio: "16/7", overflow: "hidden", borderRadius: "2px", position: "relative", background: "var(--tq-vd)" }}>
-                  <img src={j.banner_src} alt="" style={{ width: "100%", height: "100%", objectFit: "cover", display: "block" }} />
-                </div>
-              )}
-            </div>
-            <label style={{ ...ghostBtn, display: "inline-flex", alignItems: "center", cursor: uploading === `journeys-${j.id}` ? "not-allowed" : "pointer", flexShrink: 0 }}>
-              {uploading === `journeys-${j.id}` ? "Uploading…" : j.banner_src ? "Replace" : "Upload"}
-              <input type="file" accept="image/*" style={{ display: "none" }}
-                onChange={e => { const f = e.target.files?.[0]; if (f) uploadItemBanner("journeys", j.id, f); e.target.value = ""; }}
-                disabled={uploading === `journeys-${j.id}`} />
-            </label>
-          </div>
-        </div>
-      ))}
-
-      {/* Per-experience */}
-      <div style={{ fontSize: ".56rem", fontWeight: 700, letterSpacing: ".14em", textTransform: "uppercase", color: "var(--tq-d)", margin: "1.4rem 0 .75rem" }}>
-        Individual Experiences
-      </div>
-      {experiences.map(xp => (
-        <div key={xp.id} style={card}>
-          <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", gap: "1rem" }}>
-            <div style={{ flex: 1, minWidth: 0 }}>
-              <div style={{ fontSize: ".88rem", color: "var(--ink)", fontWeight: 600, whiteSpace: "nowrap", overflow: "hidden", textOverflow: "ellipsis" }}>{xp.title}</div>
-              {xp.banner_src && (
-                <div style={{ marginTop: ".4rem", width: 120, aspectRatio: "16/7", overflow: "hidden", borderRadius: "2px", position: "relative", background: "var(--tq-vd)" }}>
-                  <img src={xp.banner_src} alt="" style={{ width: "100%", height: "100%", objectFit: "cover", display: "block" }} />
-                </div>
-              )}
-            </div>
-            <label style={{ ...ghostBtn, display: "inline-flex", alignItems: "center", cursor: uploading === `experiences-${xp.id}` ? "not-allowed" : "pointer", flexShrink: 0 }}>
-              {uploading === `experiences-${xp.id}` ? "Uploading…" : xp.banner_src ? "Replace" : "Upload"}
-              <input type="file" accept="image/*" style={{ display: "none" }}
-                onChange={e => { const f = e.target.files?.[0]; if (f) uploadItemBanner("experiences", xp.id, f); e.target.value = ""; }}
-                disabled={uploading === `experiences-${xp.id}`} />
-            </label>
-          </div>
-        </div>
-      ))}
     </div>
   );
 }
