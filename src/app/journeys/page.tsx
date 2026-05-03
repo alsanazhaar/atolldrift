@@ -27,8 +27,7 @@ export default async function JourneysPage() {
         <div className="dp-hero" style={{ position: "relative", overflow: "hidden" }}>
           <JourneysBanner />
           <div className="inner" style={{ position: "relative", zIndex: 2 }}>
-            <div className="hero-text-block">
-
+            
             <Link href="/" className="dp-back">← Back to home</Link>
             <div className="dp-coord">Southern Maldives · Small Group Journeys</div>
             <h1 className="dp-title">Featured Journeys</h1>
@@ -39,7 +38,6 @@ export default async function JourneysPage() {
               <span>Confirmed on request</span>
               <span>Local guides throughout</span>
             </div>
-            </div>{/* end hero-text-block */}
           </div>
         </div>
 

@@ -130,7 +130,7 @@ export default async function AtollPage({ params }: Props) {
       <main>
 
         {/* ── Hero ── */}
-        <div style={{ background: "#0d1f24", padding: "2.5rem 1.1rem 2rem", position: "relative", overflow: "hidden", minHeight: "58vh", display: "flex", flexDirection: "column", justifyContent: "flex-end", alignItems: "flex-start" }}>
+        <div style={{ background: "#0d1f24", padding: "2.5rem 1.1rem 2rem", position: "relative", overflow: "hidden", minHeight: "58vh", display: "flex", flexDirection: "column", justifyContent: "flex-end" }}>
           {/* Background photo if available */}
           {hasPhoto && (
             <>
@@ -147,8 +147,7 @@ export default async function AtollPage({ params }: Props) {
             </>
           )}
 
-          <div className="inner" style={{ position: "relative", zIndex: 2, display: "flex", flexDirection: "column", alignItems: "flex-start" }}>
-            <div className="hero-text-block">
+          <div className="inner" style={{ position: "relative", zIndex: 2 }}>
             <Link href="/" className="dp-back">← Home</Link>
 
             <div style={{ display: "flex", alignItems: "center", gap: ".5rem", margin: ".5rem 0" }}>
@@ -180,7 +179,6 @@ export default async function AtollPage({ params }: Props) {
                 All departures
               </Link>
             </div>
-            </div>{/* end hero-text-block */}
           </div>
         </div>
 

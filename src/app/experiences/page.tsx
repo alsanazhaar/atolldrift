@@ -52,8 +52,7 @@ export default function ExperiencesPage() {
             <circle cx="110" cy="110" r="28" stroke="white" strokeWidth="0.8" fill="none" />
           </svg>
           <div className="inner" style={{ position: "relative", zIndex: 2 }}>
-            <div className="hero-text-block">
-
+            
             <div className="mkt-kicker">Southern Maldives · Local Experiences</div>
             <h1>Experiences from people<br /><em>who live here.</em></h1>
             <p>
@@ -68,7 +67,6 @@ export default function ExperiencesPage() {
                 List Your Experience
               </Link>
             </div>
-            </div>{/* end hero-text-block */}
           </div>
         </div>
 
