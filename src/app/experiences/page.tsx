@@ -68,7 +68,6 @@ export default function ExperiencesPage() {
                 List Your Experience
               </Link>
             </div>
-            </div>
             </div>{/* end hero-text-block */}
           </div>
         </div>
