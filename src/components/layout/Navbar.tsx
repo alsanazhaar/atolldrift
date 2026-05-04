@@ -97,6 +97,13 @@ export default function Navbar() {
             >
               Stories
             </Link>
+            <Link
+              href="/sustainability"
+              className="nav-coord"
+              style={{ background: "none", border: "none" }}
+            >
+              Sustainability
+            </Link>
           </div>
 
           <Link
@@ -140,6 +147,9 @@ export default function Navbar() {
         </Link>
         <Link href="/stories" onClick={closeMenu}>
           Stories
+        </Link>
+        <Link href="/sustainability" onClick={closeMenu}>
+          Sustainability
         </Link>
         <Link href="/journeys" onClick={closeMenu} style={{ fontWeight: 700 }}>
           Plan My Journey →
