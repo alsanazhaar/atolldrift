@@ -55,6 +55,7 @@ export default function Footer() {
             <div className="fh">AtollDrift</div>
             <ul className="flinks">
               <li><Link href="/about">About</Link></li>
+              <li><Link href="/sustainability">Sustainability</Link></li>
               <li><Link href="/contact">Contact</Link></li>
             </ul>
           </div>
