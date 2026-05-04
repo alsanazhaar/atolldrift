@@ -4,7 +4,7 @@ import { saveBookingRequest } from "@/lib/data";
 
 const resend = new Resend(process.env.RESEND_API_KEY);
 const ADMIN = process.env.CONTACT_EMAIL || "";
-const FROM = "AtollDrift Maldives <onboarding@resend.dev>";
+const FROM = "AtollDrift Maldives <hello@atolldriftmaldives.com>";
 
 export async function POST(req: NextRequest) {
   try {
