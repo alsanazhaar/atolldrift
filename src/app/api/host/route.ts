@@ -4,7 +4,7 @@ import { submitHostApplication } from "@/lib/data";
 
 const resend = new Resend(process.env.RESEND_API_KEY);
 const ADMIN = process.env.CONTACT_EMAIL || "";
-const FROM = "AtollDrift <onboarding@resend.dev>";
+const FROM = "AtollDrift Maldives <onboarding@resend.dev>";
 
 export async function POST(req: NextRequest) {
   try {

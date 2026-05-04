@@ -22,7 +22,7 @@ export async function generateStaticParams() {
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const atolls = await getAtolls();
   const atoll = atolls.find((a) => a.id === params.id);
-  if (!atoll) return { title: "Atoll Not Found — AtollDrift" };
+  if (!atoll) return { title: "Atoll Not Found — AtollDrift Maldives" };
   return {
     title: `${atoll.name} Atoll — AtollDrift`,
     description: `Explore curated journeys and local experiences in ${atoll.name}, southern Maldives. ${atoll.italic}`,

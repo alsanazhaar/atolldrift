@@ -7,8 +7,8 @@ import SustainabilityBanner from "@/components/ui/SustainabilityBanner";
 export const revalidate = 3600;
 
 export const metadata: Metadata = {
-  title: "Sustainability — AtollDrift",
-  description: "How AtollDrift actually operates in the Maldives. Local guesthouses, small groups, and real communities.",
+  title: "Sustainability — AtollDrift Maldives",
+  description: "description: "How AtollDrift actually operates in the Maldives. Local guesthouses, small groups, and real communities."",
 };
 
 export default function SustainabilityPage() {

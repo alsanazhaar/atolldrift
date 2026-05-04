@@ -1,3 +1,4 @@
+import type { Metadata } from "next";
 import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
 import Hero from "@/components/sections/Hero";
@@ -10,6 +11,11 @@ const AIJourneyFinder = dynamic(() => import("@/components/ui/AIJourneyFinder"),
 import { getAtolls, getJourneys } from "@/lib/data";
 
 export const revalidate = 120;
+
+export const metadata: Metadata = {
+  title: "AtollDrift Maldives — Real Journeys Beyond Resorts",
+  description: "AtollDrift takes small groups into the southern Maldives — Huvadhu, Fuvahmulah, and Addu. Local guesthouses, real guides, flexible dates.",
+};
 
 export default async function HomePage() {
   const [atolls, journeys] = await Promise.all([

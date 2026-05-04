@@ -9,8 +9,8 @@ import type { Story } from "@/lib/types";
 export const revalidate = 180;
 
 export const metadata: Metadata = {
-  title: "Stories — AtollDrift",
-  description: "Local voices and real stories from the southern atolls of the Maldives.",
+  title: "Stories — AtollDrift Maldives",
+  description: "description: "Local voices and real stories from the southern Maldives — Huvadhu, Fuvahmulah, and Addu."",
 };
 
 function formatDate(d: string) {

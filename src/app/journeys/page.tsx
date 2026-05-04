@@ -10,8 +10,8 @@ import { getJourneys, getAtolls } from "@/lib/data";
 export const revalidate = 120;
 
 export const metadata: Metadata = {
-  title: "All Journeys — AtollDrift",
-  description: "Small-group journeys across Huvadhu, Fuvahmulah, and Addu. Flexible dates, confirmed on request.",
+  title: "Journeys — AtollDrift Maldives",
+  description: "description: "Small-group journeys across Huvadhu, Fuvahmulah, and Addu. Flexible dates, confirmed on request."",
 };
 
 export default async function JourneysPage() {

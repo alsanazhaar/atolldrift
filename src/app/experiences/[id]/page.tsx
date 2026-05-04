@@ -20,7 +20,7 @@ export async function generateStaticParams() {
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const xp = await getExperienceById(params.id);
-  if (!xp) return { title: "Experience Not Found — AtollDrift" };
+  if (!xp) return { title: "Experience Not Found — AtollDrift Maldives" };
   return { title: `${xp.title} — AtollDrift Experiences`, description: xp.description.slice(0, 150) + "..." };
 }
 

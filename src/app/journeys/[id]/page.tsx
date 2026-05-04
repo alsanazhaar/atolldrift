@@ -21,7 +21,7 @@ export async function generateStaticParams() {
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const journey = await getJourneyById(params.id);
-  if (!journey) return { title: "Journey Not Found — AtollDrift" };
+  if (!journey) return { title: "Journey Not Found — AtollDrift Maldives" };
   return { title: `${journey.title} — AtollDrift`, description: journey.tagline };
 }
 

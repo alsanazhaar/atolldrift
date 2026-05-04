@@ -23,7 +23,7 @@ export default function Footer() {
           Have You Seen The Maldives?
         </div>
         <p className="fd">
-          Group journeys and local experiences across Huvadhu, Fuvahmulah, and Addu.
+          Small-group journeys across Huvadhu, Fuvahmulah, and Addu — the Maldives beyond the resorts.
         </p>
 
         <div className="f-cols">

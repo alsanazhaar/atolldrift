@@ -20,7 +20,7 @@ export async function generateStaticParams() {
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const story = await getStoryBySlug(params.slug);
-  if (!story) return { title: "Story Not Found — AtollDrift" };
+  if (!story) return { title: "Story Not Found — AtollDrift Maldives" };
   return {
     title: `${story.title} — AtollDrift Stories`,
     description: story.excerpt,
