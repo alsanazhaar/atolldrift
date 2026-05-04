@@ -10,7 +10,7 @@ export const revalidate = 180;
 
 export const metadata: Metadata = {
   title: "Stories — AtollDrift Maldives",
-  description: "Local voices and real stories from the southern Maldives — Huvadhu, Fuvahmulah, and Addu."",
+  description: "Local voices and real stories from the southern Maldives — Huvadhu, Fuvahmulah, and Addu.",
 };
 
 function formatDate(d: string) {
