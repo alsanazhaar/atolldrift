@@ -6,7 +6,7 @@ import Footer from "@/components/layout/Footer";
 import { getPublishedStories, getAtolls } from "@/lib/data";
 import type { Story } from "@/lib/types";
 
-export const revalidate = 0;
+export const revalidate = 180;
 
 export const metadata: Metadata = {
   title: "Stories — AtollDrift",

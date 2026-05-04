@@ -36,7 +36,7 @@ function JourneyCard({ journey }: { journey: Journey }) {
       {/* Image strip */}
       {img && (
         <div className="jcard-img">
-          <img src={img} alt={journey.title} />
+          <img src={img} alt={journey.title} loading="lazy" decoding="async" />
         </div>
       )}
       {/* Text content */}

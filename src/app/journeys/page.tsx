@@ -2,11 +2,12 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
-import AIJourneyFinder from "@/components/ui/AIJourneyFinder";
+import dynamic from "next/dynamic";
+const AIJourneyFinder = dynamic(() => import("@/components/ui/AIJourneyFinder"), { ssr: false });
 import JourneysBanner from "@/components/ui/JourneysBanner";
 import { getJourneys, getAtolls } from "@/lib/data";
 
-export const revalidate = 0;
+export const revalidate = 120;
 
 export const metadata: Metadata = {
   title: "All Journeys — AtollDrift",
@@ -78,7 +79,7 @@ export default async function JourneysPage() {
                         style={{ textDecoration: "none" }}>
                         {(journey as any).bannerSrc && (
                           <div className="jcard-img">
-                            <img src={(journey as any).bannerSrc} alt={journey.title} />
+                            <img src={(journey as any).bannerSrc} alt={journey.title} loading="lazy" decoding="async" />
                           </div>
                         )}
                         <div className="jcard-content">

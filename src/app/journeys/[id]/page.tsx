@@ -9,7 +9,7 @@ import MobileBookBar from "@/components/ui/MobileBookBar";
 import { TealBannerBg } from "@/components/ui/TealBanner";
 import { getJourneys, getJourneyById, getAtolls, getExperiences } from "@/lib/data";
 
-export const revalidate = 0;
+export const revalidate = 120;
 export const dynamicParams = true;
 
 interface Props { params: { id: string } }

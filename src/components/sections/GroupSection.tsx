@@ -62,7 +62,7 @@ export default function GroupSection({ journeys = [] }: GroupSectionProps) {
                 style={{ textDecoration: "none" }}>
                 {(j as any).bannerSrc && (
                   <div className="jcard-img">
-                    <img src={(j as any).bannerSrc} alt={j.title} />
+                    <img src={(j as any).bannerSrc} alt={j.title} loading="lazy" decoding="async" />
                   </div>
                 )}
                 <div className="jcard-content">

@@ -8,7 +8,7 @@ import AIJourneyFinder from "@/components/ui/AIJourneyFinder";
 import { getPublishedStories, getStoryBySlug, getAtolls, getJourneys, getExperiences } from "@/lib/data";
 import type { StoryImage } from "@/lib/types";
 
-export const revalidate = 0;
+export const revalidate = 180;
 export const dynamicParams = true;
 
 interface Props { params: { slug: string } }

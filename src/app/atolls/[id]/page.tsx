@@ -9,7 +9,7 @@ import { getAtolls, getJourneys, getExperiences } from "@/lib/data";
 import AtollHeroSlideshow from "@/components/ui/AtollHeroSlideshow";
 import type { Journey, Experience } from "@/lib/types";
 
-export const revalidate = 0;
+export const revalidate = 300;
 export const dynamicParams = true;
 
 interface Props { params: { id: string } }
@@ -41,7 +41,7 @@ function JourneyCard({ journey }: { journey: Journey }) {
       {/* Image strip */}
       {img && (
         <div className="jcard-img">
-          <img src={img} alt={journey.title} />
+          <img src={img} alt={journey.title} loading="lazy" decoding="async" />
         </div>
       )}
       {/* Text content */}

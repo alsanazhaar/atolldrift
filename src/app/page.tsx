@@ -5,10 +5,11 @@ import AtollSection from "@/components/sections/AtollSection";
 import GroupSection from "@/components/sections/GroupSection";
 import Manifesto from "@/components/sections/Manifesto";
 import Reviews from "@/components/sections/Reviews";
-import AIJourneyFinder from "@/components/ui/AIJourneyFinder";
+import dynamic from "next/dynamic";
+const AIJourneyFinder = dynamic(() => import("@/components/ui/AIJourneyFinder"), { ssr: false });
 import { getAtolls, getJourneys } from "@/lib/data";
 
-export const revalidate = 0;
+export const revalidate = 120;
 
 export default async function HomePage() {
   const [atolls, journeys] = await Promise.all([

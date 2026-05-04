@@ -3,15 +3,14 @@ import type { Atoll, Journey, Experience, Story, StoryImage } from "@/lib/types"
 // Types re-exported from types.ts for convenience
 export type { Atoll, Journey, Experience, ExperienceCategory } from "@/lib/types";
 
-function db() {
-  return createClient(
-    process.env.NEXT_PUBLIC_SUPABASE_URL!,
-    process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!
-  );
-}
+// Shared singleton — avoids creating a new client on every data call
+const db = createClient(
+  process.env.NEXT_PUBLIC_SUPABASE_URL!,
+  process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!
+);
 
 export async function getAtolls(): Promise<Atoll[]> {
-  const client = db();
+  const client = db;
   const [{ data: atollRows, error }, { data: journeyRows }] = await Promise.all([
     client.from("atolls").select("*, atoll_truths(text,variant,sort_order), atoll_photos(*)").eq("is_active", true).order("sort_order"),
     client.from("journeys").select("id, atoll_id"),
@@ -38,8 +37,8 @@ export async function getAtolls(): Promise<Atoll[]> {
 }
 
 export async function getJourneys(): Promise<Journey[]> {
-  const { data, error } = await db().from("journeys")
-    .select("*, banner_src, journey_included(item,sort_order), journey_days(label,title,description,sort_order)")
+  const { data, error } = await db.from("journeys")
+    .select("*, journey_included(item,sort_order), journey_days(label,title,description,sort_order)")
     .order("atoll_id");
   if (error || !data) { console.error("[AtollDrift] getJourneys:", error?.message); return []; }
   return data.map((row: any) => ({
@@ -59,7 +58,7 @@ export async function getJourneyById(id: string): Promise<Journey | null> {
 }
 
 export async function getExperiences(): Promise<Experience[]> {
-  const { data, error } = await db().from("experiences")
+  const { data, error } = await db.from("experiences")
     .select("*")
     .order("created_at");
   if (error || !data) { console.error("[AtollDrift] getExperiences:", error?.message); return []; }
@@ -84,7 +83,7 @@ export async function saveBookingRequest(payload: {
   guestName: string; guestEmail: string; guestCount?: number;
   preferredDate?: string; notes?: string;
 }) {
-  const { error } = await db().from("booking_requests").insert({
+  const { error } = await db.from("booking_requests").insert({
     type: payload.type, item_id: payload.itemId, departure_id: null,
     guest_name: payload.guestName, guest_email: payload.guestEmail,
     guest_count: payload.guestCount, preferred_date: payload.preferredDate ?? null,
@@ -98,7 +97,7 @@ export async function submitHostApplication(payload: {
   category?: string; xpTitle?: string; xpDescription?: string; duration?: string;
   groupSize?: string; price?: number; included?: string; notes?: string;
 }) {
-  const { error } = await db().from("host_applications").insert({
+  const { error } = await db.from("host_applications").insert({
     full_name: payload.fullName, atoll: payload.atoll, island: payload.island ?? null,
     years_here: payload.yearsHere ?? null, contact: payload.contact,
     category: payload.category ?? null, xp_title: payload.xpTitle ?? null,
@@ -131,7 +130,7 @@ function mapStory(row: any, images: StoryImage[] = []): Story {
 }
 
 export async function getPublishedStories(): Promise<Story[]> {
-  const { data, error } = await db()
+  const { data, error } = await db
     .from("stories")
     .select("*")
     .eq("is_published", true)
@@ -141,9 +140,9 @@ export async function getPublishedStories(): Promise<Story[]> {
 }
 
 export async function getStoryBySlug(slug: string): Promise<Story | null> {
-  const client = db();
+  const client = db;
   const [{ data: story }, { data: images }] = await Promise.all([
-    client.from("stories").select("*").eq("slug", slug).eq("is_published", true).maybeSingle(),
+    client.from("stories").select("id,title,slug,excerpt,content,cover_image_url,person_image_url,atoll_id,author_name,is_published,published_at").eq("slug", slug).eq("is_published", true).maybeSingle(),
     client.from("story_images").select("*").order("sort_order"),
   ]);
   if (!story) return null;
@@ -160,7 +159,7 @@ export async function getStoryBySlug(slug: string): Promise<Story | null> {
 }
 
 export async function getAllStories(): Promise<Story[]> {
-  const { data, error } = await db()
+  const { data, error } = await db
     .from("stories")
     .select("*")
     .order("created_at", { ascending: false });
@@ -180,7 +179,7 @@ export interface Review {
 }
 
 export async function getPublishedReviews(): Promise<Review[]> {
-  const { data, error } = await db()
+  const { data, error } = await db
     .from("reviews")
     .select("*")
     .eq("is_published", true)

@@ -8,7 +8,7 @@ import BookingForm from "@/components/ui/BookingForm";
 import { TealBannerBg } from "@/components/ui/TealBanner";
 import { getExperiences, getExperienceById } from "@/lib/data";
 
-export const revalidate = 0;
+export const revalidate = 180;
 export const dynamicParams = true;
 
 interface Props { params: { id: string } }
