@@ -8,7 +8,7 @@ export const revalidate = 3600;
 
 export const metadata: Metadata = {
   title: "Sustainability — AtollDrift Maldives",
-  description: "description: "How AtollDrift actually operates in the Maldives. Local guesthouses, small groups, and real communities."",
+  description: "How AtollDrift actually operates in the Maldives. Local guesthouses, small groups, and real communities.",
 };
 
 export default function SustainabilityPage() {
