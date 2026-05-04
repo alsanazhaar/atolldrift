@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
+import SustainabilityBanner from "@/components/ui/SustainabilityBanner";
 
 export const revalidate = 3600;
 
@@ -21,8 +22,17 @@ export default function SustainabilityPage() {
           background: "#0d1f24",
           padding: "4rem 1.1rem 3rem",
           borderBottom: "1px solid var(--tq-vd)",
+          position: "relative",
+          overflow: "hidden",
         }}>
-          <div className="inner">
+          <SustainabilityBanner />
+          {/* gradient over photo */}
+          <div style={{
+            position: "absolute", inset: 0,
+            background: "linear-gradient(to bottom, rgba(0,0,0,.15) 0%, transparent 30%, rgba(0,0,0,.5) 65%, rgba(0,0,0,.82) 100%)",
+            zIndex: 1,
+          }} />
+          <div className="inner" style={{ position: "relative", zIndex: 2 }}>
             <Link href="/" className="dp-back" style={{ marginBottom: "1.4rem", display: "inline-block" }}>← Home</Link>
             <div style={{
               fontSize: ".52rem", fontWeight: 700, letterSpacing: ".18em",

@@ -1164,6 +1164,11 @@ function PageBannersSection({ toast }: { toast: (t: Toast) => void }) {
       </div>
       <UploadBtn page="manifesto" src={banners["manifesto"]} label="Manifesto background" />
 
+      <div style={{ fontSize: ".56rem", fontWeight: 700, letterSpacing: ".14em", textTransform: "uppercase", color: "var(--tq-d)", margin: "1.4rem 0 .75rem" }}>
+        Other Pages
+      </div>
+      <UploadBtn page="sustainability" src={banners["sustainability"]} label="Sustainability page" />
+
     </div>
   );
 }
